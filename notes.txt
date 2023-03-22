@@ -1,0 +1,9 @@
+Machine Learning Pathways
+collect and store -> clean & organize -> exploratory data analysis -> machine learning models
+
+Raw Data -> Processing and Storing Data = data engineering (collect & store data)
+-> Clean & organize data -> exploratory data analysis = data analyst/data scientist. exploratory analysist -> report, visualization, communication
+-> machine learning models = data scientist/machine learning engineer
+
+Supervised learning - predict an outcome
+Unsupervised learning - discover patterns in data
