@@ -12,9 +12,9 @@ df = pd.read_csv('tips.csv')
 reset_df = df
 
 # Single condition Conditional filtering
-df = df[df['tip'] > 4] # Get tips > $4.00 single line
 is_lunch = df['time'] == 'Lunch' # Two line method. More readable, but another variable which is inefficient. Is lunch is a Pandas Series of booleans of whether or not the time column is "Lunch"
 df = df[is_lunch] # Two line method. More readable, but another variable which is inefficient
+df = df[df['tip'] > 4] # Get tips > $4.00 single line
 df = df[df['smoker'] == 'Yes'] # Another single line example
 
 # Multiple condition filter
