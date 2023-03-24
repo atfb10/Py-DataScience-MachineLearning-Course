@@ -49,7 +49,7 @@ df.describe() # Statistical information
 
 # Sorting
 df.sort_values('tip') # Ascending
-df.sort_values('tip', ascending=False) # ascending
+df.sort_values('tip', ascending=False) # deescending
 df.sort_values(['tip', 'total_bill']) # Multiple columns
 
 # Searching

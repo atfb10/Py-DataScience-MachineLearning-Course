@@ -26,5 +26,5 @@ print(sales.head())
 print('-----------------------------------------------------------------------')
 
 # Pivot table example 2 - group by acc manager and contact. get total sale price for each account manager by their contact. replace NaN values with 0
-acc_mng_pivot_table = pd.pivot_table(data=df, index=['Account Manager', 'Contact'], values='Sale Price', aggfunc='sum', fill_value=0)
+acc_mng_pivot_table = pd.pivot_table(data=df, index=['Account Manager', 'Contact', ], values='Sale Price', aggfunc='sum', fill_value=0)
 print(acc_mng_pivot_table)
