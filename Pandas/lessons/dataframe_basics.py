@@ -2,8 +2,8 @@
 Author: Adam Forestier
 Date: March 22, 2023
 Notes
-    - Dataframe: group of Pandas Series objects that share the same index
-                 a table of columns & rows that can be restructured and refiltered
+- Dataframe: group of Pandas Series objects that share the same index
+            a table of columns & rows that can be restructured and refiltered
 '''
 
 import numpy as np
