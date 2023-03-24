@@ -19,8 +19,8 @@ def price_class(price):
         p_class = '$$$'
     return p_class
 
-last_four_cc = df['CC Number'].apply(lambda num: str(num)[-4:]) # This will create a Pandas series of the last 4 digits of credit card numbers. The column name is the argument being passed into the lambda
 df['price_class'] = df['total_bill'].apply(price_class) # Create a new column in the dataframe using the apply class
+last_four_cc = df['CC Number'].apply(lambda num: str(num)[-4:]) # This will create a Pandas series of the last 4 digits of credit card numbers. The column name is the argument being passed into the lambda
 
 # apply() for multiple arguments
 def quality_tipper(total_bill, tip):
