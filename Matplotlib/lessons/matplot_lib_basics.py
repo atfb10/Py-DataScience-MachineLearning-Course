@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 x = np.arange(0,10)
 y = x * 2
 
-# Plot 
+# Plot using functional programming approach
 plt.plot(x,y)
 plt.title('x and y plot')
 plt.xlabel('x axis')
