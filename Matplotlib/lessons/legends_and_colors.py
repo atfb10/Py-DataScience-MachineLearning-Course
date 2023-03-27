@@ -11,7 +11,7 @@ axes = fig.add_axes([0,0,1,1])
 
 x = np.linspace(0,10,11)
 
-axes.set_xlabel(x)
+axes.set_xlabel('x')
 axes.set_title('X by x^2 by x^3')
 
 # label
