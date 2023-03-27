@@ -18,5 +18,5 @@ axes.set_title('X by x^2 by x^3')
 axes.plot(x, x, label='x vs x', color='green', linewidth=1, marker='o', markerfacecolor='red', markeredgewidth=19, markeredgecolor='orange') # color via text
 axes.plot(x, x**2, label='x vs x squared', color='#650dbd', lw=2, linestyle='-', marker='v', ms=5) # color w/ RGB Hex code. lw=linewidth. ms = markersize
 axes.plot(x, x**3, label='x vs x cubed', color='#010dbd', lw=5, ls='-.', marker='h', markersize=10) # color w/ RGB Hex code. ls = linestyle
-
+axes.legend(loc=(-.5,.5))
 plt.show()
