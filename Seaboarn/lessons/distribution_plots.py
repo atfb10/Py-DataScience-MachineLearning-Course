@@ -6,7 +6,7 @@ Notes:
     - 3 types: Rug Plot, Histogram, KDE (kernal density estimation) plot
         Rug: single tick per value along the x-axis. No y-axis
         Histogram: count number of ticks for each value or value range. y is the count or percent
-        Kernal Density Estimation: a method of estimating a probabilty density function of a random variable: it is a way of estimaating a continuous probability curve for a finite data sample
+        Kernal Density Estimation: a method of estimating a probabilty density function of a random variable: it is a way of estimating a continuous probability curve for a finite data sample
             - most commonly use Gaussian distribution; normal distribtuion curve to display continuous probability
 '''
 
