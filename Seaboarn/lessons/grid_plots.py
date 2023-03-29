@@ -2,6 +2,8 @@
 Author: Adam Forestier
 Date: March 29, 2023
 Notes:
+    - seaborn grids are anagolous to Matplotlib subplots() to automatically create a grid based off of a categorical column
+    - Instead of passing a specific number of columns or rows, one simply passes in the name of the column and seaborn with automatically map the subplots grid!
 '''
 import matplotlib.pyplot as plt
 import numpy as np
