@@ -47,5 +47,5 @@ sns.violinplot(data=df, y='writing score', x='gender')
 plt.show()
 
 # Swarm plot
-sns.swarmplot(data=df, x='race/ethnicity', y='math score', hue='lunch', size=3) # I really like the swarmplot
+sns.swarmplot(data=df, x='race/ethnicity', y='math score', hue='lunch', size=3, dodge=True) # I really like the swarmplot
 plt.show()
