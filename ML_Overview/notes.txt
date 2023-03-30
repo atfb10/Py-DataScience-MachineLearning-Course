@@ -1,0 +1,50 @@
+Adam Forestier
+March 29, 2023
+MACHINE LEARNING OVERVIEW
+
+Use library in Python called Scikit learn
+
+Machine Learning - the study of statistical computer algorithms that improve automatically through data
+    
+    * This means, that apposed to typical computer algorithms which rely on human input for which approach to take, ML algorithms infer best approach from data
+    * ML is a subset of AI 
+    * ML algorithms are not explicitly programmed on which decisions to make
+    * The algorithm is designed to infer from the data the most optimal choices to make
+
+Examples of Problems ML Solves
+    * Credit scoring
+    * Insurance risk 
+    * Price forecasting
+    * Spam filtering
+    * Customer segmentation 
+
+Structure of ML Problem framing
+    * Given features from a data set, obtain a desired label
+    * ML Algorithms are often called "estimators" since they are estimating the desired label or output
+
+Majority of ML development time is spent cleaning and organizing data, not implementing the algorithms themselves
+
+Types of Machine Learning Algorithms
+    Supervised Learning - Predicting an outcome
+        * Using historical and labeled data, the ml model predicts a value
+            > historical - known results and data from the past 
+            > labeled - the desired output is known
+                      - 2 main types 
+                            1. Categorical value to predict = classication task
+                                Classification task: Cancerous vs. Benign tumour, Fulfilment vs. Credit default, Assigning image recognition (handwriting)
+                            2. Continuous value to predict = regression task 
+                                Continuous task: Future prices, electricity loads, test scores
+    Unsupervised Learning - Discovering a pattern
+        * applied to unlabled data the ml model discovers possible patterns in the data
+            Example: Clustering customers into seperate groups based on their behaviors
+            Challenge: There is no historical correct label. It is harder to evaluate algorithm's performance
+
+Supervised Learning Process
+    * Get data 
+    * Clean data 
+    * Seperate data in features and label
+    * Split data into training data and test data set. Use the training set to have the model learn and then see how accurate the model is based on the test data set (most data should fall under training)
+    * Evaluate the performance
+    * Adjust and then retrain model until happy
+    * Deploy model
+    
