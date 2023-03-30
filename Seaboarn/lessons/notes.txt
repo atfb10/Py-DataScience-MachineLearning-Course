@@ -1,0 +1,7 @@
+Adam Forestier
+March 28, 2023
+Notes
+    - Seaboarn is a high level abstraction for matplotlib
+    - Since it is built off of matplotlib, you can still make plt method calls to directly affect the seaborn plot
+    - A typical seaborn plot is one line of code: takes in a dataframe and a corresponding string value for 2 columns of the dataframe
+    - Example: sns.scatterplot(x='salary', y='sales', data='df')
