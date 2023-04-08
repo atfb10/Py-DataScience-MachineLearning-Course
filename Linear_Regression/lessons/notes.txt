@@ -1,0 +1,14 @@
+Adam Forestier
+April 1, 2023
+
+* Linear relationship implies some constant straight line relationship
+
+Squared Error - difference between points and line drawn to fit the data
+
+Ordinary Least Squares - minimizes sum of the squares of the differences between the observed dependent variable in the given dataset and those predicted by the linear function
+OLS Theory
+    * equation of a straight line: y = mx + b (m is slope, b is intercept with y-axis)
+              - in this equation, there is only room for one possible feature x
+    * OLS will allow us to solve for the slope (m), and the intercept (b)
+
+NOTE TO SELF: MATH NOTES TAKEN NOTEBOOK 
