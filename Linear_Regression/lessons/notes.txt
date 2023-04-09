@@ -1,7 +1,8 @@
 Adam Forestier
-April 1, 2023
+April 9, 2023
 
 * Linear relationship implies some constant straight line relationship
+* Regression is used for continuous data 
 
 Squared Error - difference between points and line drawn to fit the data
 
@@ -12,3 +13,41 @@ OLS Theory
     * OLS will allow us to solve for the slope (m), and the intercept (b)
 
 NOTE TO SELF: MATH NOTES TAKEN NOTEBOOK 
+
+Most Common evaluation metrics for regression:
+    * Mean Absolute Error: The absolute value of errors
+        > Simple 
+        > MAE will not punish large errors (Outliers)
+    * Mean Squared Error: Square value of errors
+        > Large errors are punished
+        > Reports units different than y - y^2
+    * Root Mean Square Error: Root of the mean of the squared error
+        > Most popular
+        > Punishes large errors 
+        > Reports same 
+        
+Performance Evaluation 
+    * Compare your error metric to the average value of the label in your data set to try to get an intuition of it its overall performance
+    * Domain knowledge plays an important role
+    * Context is important
+        > How vital is close accuracy (medications to give?)
+        > Difference in value for a good model depends on what you are trying to predict ($10 off of price of car is much different than $10 off price of grocery item)
+    * Often for linear regression it is a good idea to seperately evaluate residuals and not just calculate performance
+        > How to do for more than 1x?
+            ^ Plot residual error against true y values!
+                # Residual plot should have no clear line or curve if it the data is a good fit for linear regression
+            ^ Residual errors should be random and close to a normal distribution
+
+SciKit Learn
+    - sklearn: lib containing many ml algorithms 
+    - utilizes geneeralized "estimator API" framework to call models: Algorithms are imported, fitted and used uniformly across all algorithms
+    - this allows users to swap out algorithms easily to test various approaches
+    - sklearn is a "one stop shop for ml"; includes train/test split, cross validation, etc.
+    - "statsmodels" python library contains more statistical description of models such as significance levels
+
+    General steps:
+        1. import Algorithm Model class & error metric from sklearn
+        2. create object of Algortithm model by passing in parameters
+        3. fit the model with train set parameters
+        4. predict on the test set
+        5. view performance by running error metric on test and predictions
