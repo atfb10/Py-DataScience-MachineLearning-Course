@@ -17,7 +17,8 @@ from sklearn.linear_model import (
     Lasso, # LASSO with Cross Validation! It performs LASSO Regression for a variety of alpha values. Should ALWAYS choose this one - cross validation is more accurate than not using it... duh
     LassoCV,
     Ridge,
-    RidgeCV, # Ridge with Cross Validation! It performs Ridge Regression for a variety of alpha values. Should ALWAYS choose this one - cross validation is more accurate than not using it... duh
+    RidgeCV, # Ridge with Cross Validation! It performs Ridge Regression for a variety of alpha values. Should ALWAYS choose this one - cross validation is more accurate than not using it... 
+    ElasticNetCV
 )
 from sklearn.metrics import (
     mean_absolute_error,
@@ -49,7 +50,7 @@ model.fit(scaled_X_train, y_train)
 test_pred = model.predict(scaled_X_test)
 mae = mean_absolute_error(y_test, test_pred)
 rmse = np.sqrt(mean_squared_error(y_test, test_pred))
-print('Original Linear Regression')
+print('Original Polynomial Linear Regression')
 print(f'MAE: {mae}')
 print(f'rmse: {rmse}')
 print('-------------------------------')
@@ -97,13 +98,32 @@ print(f'MAE: {mae}')
 print(f'rmse: {rmse}')
 print('-------------------------------')
 
-# Elastic Regression
-
-
+# Elastic Net Regression
+# eps is ratio of alpha min to alpha max
+# n_alphas is the number of alphas checked
+# l1_ratio float between 0 and 1. Pass a list of values. Documentation recommends using more values closer to 1 (lasso), and less close to 0 (ridge) Best prediction score is selected using cross 
+# NOTE: Huge NOTE!!! Always just revert to elastic net, as it will revert to l1 or l2 (lasso or ridge), if it determines this is the best approach
+en_cv_model = ElasticNetCV(eps=0.001, n_alphas=100, l1_ratio=[.1, .3, .5, .75, .8, .9, .95, .99, 1], cv=None, max_iter=1000000)
+en_cv_model.fit(scaled_X_train, y_train)
+test_pred = en_cv_model.predict(scaled_X_test)
+mae = mean_absolute_error(y_test, test_pred)
+rmse = np.sqrt(mean_squared_error(y_test, test_pred))
+print('Cross Validated Elastic Net Regression')
+print(f'Best Scoring Alpha: {en_cv_model.alpha_}') # See which alpha performed the best
+print(f'Best Scoring L1 Ratio: {en_cv_model.l1_ratio_}') # See which l1 ration performed the best
+print(f'MAE: {mae}')
+print(f'rmse: {rmse}')
+print('-------------------------------')
 
 # See the coefficients
-print(f'LASSO Beta Coefficients {lasso_cv_model.coef_}') # Only considering a few coefficients (ones not equal to 0)! A very simple and easy to understand model
-print(f'Ridge Beta Coefficients {ridge_cv_model.coef_}') # considers all coefficients, more complex and harder to understand. 
-
 # lasso_cv_model and ridge_cv_model in this instance are very close in accuracy, but lasso is a simpler model. 
 # NOTE: IMPORTANT: Context considered - when accuracy is close, always choose the simpler model
+print(f'LASSO Beta Coefficients {lasso_cv_model.coef_}') # Only considering a few coefficients (ones not equal to 0)! A very simple and easy to understand model
+print(f'Ridge Beta Coefficients {ridge_cv_model.coef_}') # considers all coefficients, more complex and harder to understand. 
+print(f'Elastic Net Coefficients: {en_cv_model.coef_}') # This is the EXACT same as L1 (Lasso)! For simple data sets, often LASSO is the best selection already!
+print('--------------------------')
+
+# save model and converter
+dump(en_cv_model, 'final_elasticnet_model.joblib')
+dump(poly_converter, 'final_poly_converter.joblib')
+
