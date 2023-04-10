@@ -88,7 +88,7 @@ Regularization
     * Seeks to solve common model issues
         > Minimize model complexity
         > Penalizing the loss function 
-        > Reducing model overfitting (add bias to remove variance)
+        > Reducing model overfitting (add bias to remove variance) - Easy way: ALWAYS remove statsitically insignificant variables to decrease overfitting!
     * 3 main types 
         1. L1 Regularization - adds a penalty to the absolute value of the magnitude of the coefficients 
             # LASSO Regression (LASSO = least absolute shrinkage and selection operator)
