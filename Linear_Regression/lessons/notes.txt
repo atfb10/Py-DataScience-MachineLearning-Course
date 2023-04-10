@@ -51,7 +51,13 @@ SciKit Learn
                 b. values raised to a power for each degree
                 c. interactions between all pairs of features
                     - Example: Two features of A and B 
-                        # Converts two features to: 1, A, B, A**2, AB, B**2     
+                        # Converts two features to: 1, A, B, A**2, AB, B**2   
+    - feature scaling 
+        > .fit() call calculates the Xmin, Xmax, mean, standard deviation
+        > .transform() scales data and returns the new scaled version of the data
+            # IMPORTANT: for feature scaling, ONLY FIT TO TRAINING DATA! 
+            # Using the full data set would cause data leakage
+                ^ Data leakage - calculating statistics from fulll data set leads to some of the information of the test set leaking into the process upon the transform conversion
 
     General steps:
         1. import Algorithm Model class & error metric from sklearn
@@ -88,12 +94,60 @@ Regularization
             # LASSO Regression 
                 ^ Limits size of coefficients
                 ^ Downfall: Can yield sparse models where some coefficients can be zero
-        2. L2 Regularization - Adds a penalty equal to the square of the magnitude of coefficients
-            # Ridge Regression 
+        2. L2 Regularization - Adds a penalty equal to the square of the magnitude of coefficients (shrinkage penalty)
+            # Ridge Regression
                 ^ All coefficients are shrunk by the same factor
                 ^ Does not necessarily eliminate coefficients
+                ^ The shrinkage penalty is tuneable (lambda)
+                    * How to choose best lambda value?
+                        - Use cross validation to explore multiple lambda options and then choose the best one 
+                    * In sklearn, lambda is referred to as alpha!!!!!!!
         3. Combining L1 & L2 - combine L1 & L2 w/ the addition of an alpha parameter deciding the ration between them
             # Elastic Net
     * Costs of Regularization methods 
         > Introduce additional hyperparameter that needs to be tuned
         > A multiplier to the penalty to decide the "strength" of the penalty
+
+Feature Scaling
+    * Improvees convergance of steepest descent algorithms, which do not possess the property of scale invariance
+    * Critical benefit of feature scaling related to gradient descent
+    * Allows us to directly compare model coefficients to each other
+    * Benefits
+        > lead to great increases in performance
+        > Absolutely necessary for models 
+        > Virtually no "real" downsides
+            # Does not take not long to compute 
+            # Will not harm any algorthim
+    * Caveats
+        > Must always scale new data before feeding to model 
+        > effects direct interpretability of feature coefficients
+            ^ Easier to compare coefficients to one another, harder to relate back to original unscaled feature
+    * Two main ways to scale
+        1. Standardization - rescales data to have mean of 0 and standard deviation of 1 (also referred to "Z-score normalization")
+        2. Normalization - rescales all data values to be between 0 and 1
+    * Steps
+        1. Perform train, test split 
+        2. Fit to training data 
+        3. Transform training data 
+        4. Transform test data
+    * Note - never feature scale for y
+
+Cross Validation
+    * More advanced set of methods for splitting data into training and testing sets
+    * Allows you to train all parts and test all parts!
+        > Run train and test on all k parts, calculate the error and the then get the mean error back
+        > Gives much better sense of true performance, because multiple splits have occurred
+    * Con 
+        > Have to repeat computations k number of times (computationally expensive on large data sets)
+    * I will be using K-fold cross-validation! Always - it will alwasy produce the most accurate model.
+        > Common choice for K is 10 so each test set is 10% of your total data
+        > Largest K possible would be equal to number of rows 
+            # Known as leave one out cross validation (computationally very expensive, but the logical choice for any smaller dataset)
+            # By far the most accurate
+    * How to understand how model behaves for data it has not seen and not been influenced by? This is philosophical - I personally will ignore this
+        > Use a "hold out" test set
+            # K-fold cross validation for everything except the hold out test set
+            # After training and tuning, perform final test on the hold out test set
+    * sklearn useres a "scorer object" for cross validation metrics 
+        > higher return values are better than lower return values
+        > for sklearn, this also applies to RMSE, where smaller is better! A negative rmse is created by sklearn, so the highest negative number is the best!
