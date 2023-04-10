@@ -1,0 +1,155 @@
+Adam Forestier
+April 9, 2023
+
+* Linear relationship implies some constant straight line relationship
+* Regression is used for continuous data 
+
+Squared Error - difference between points and line drawn to fit the data
+
+Ordinary Least Squares - minimizes sum of the squares of the differences between the observed dependent variable in the given dataset and those predicted by the linear function
+OLS Theory
+    * equation of a straight line: y = mx + b (m is slope, b is intercept with y-axis)
+              - in this equation, there is only room for one possible feature x
+    * OLS will allow us to solve for the slope (m), and the intercept (b)
+
+NOTE TO SELF: MATH NOTES TAKEN NOTEBOOK 
+
+Most Common evaluation metrics for regression:
+    * Mean Absolute Error: The absolute value of errors
+        > Simple 
+        > MAE will not punish large errors (Outliers)
+    * Mean Squared Error: Square value of errors
+        > Large errors are punished
+        > Reports units different than y - y^2
+    * Root Mean Square Error: Root of the mean of the squared error
+        > Most popular
+        > Punishes large errors 
+        > Reports same 
+        
+Performance Evaluation 
+    * Compare your error metric to the average value of the label in your data set to try to get an intuition of it its overall performance
+    * Domain knowledge plays an important role
+    * Context is important
+        > How vital is close accuracy (medications to give?)
+        > Difference in value for a good model depends on what you are trying to predict ($10 off of price of car is much different than $10 off price of grocery item)
+    * Often for linear regression it is a good idea to seperately evaluate residuals and not just calculate performance
+        > How to do for more than 1x?
+            ^ Plot residual error against true y values!
+                # Residual plot should have no clear line or curve if it the data is a good fit for linear regression
+            ^ Residual errors should be random and close to a normal distribution
+
+SciKit Learn
+    - sklearn: lib containing many ml algorithms 
+    - utilizes geneeralized "estimator API" framework to call models: Algorithms are imported, fitted and used uniformly across all algorithms
+    - this allows users to swap out algorithms easily to test various approaches
+    - sklearn is a "one stop shop for ml"; includes train/test split, cross validation, etc.
+    - "statsmodels" python library contains more statistical description of models such as significance levels
+    - sklearn's preprocessing library contains many useful tools to apply to original data before model training 
+        > One is the "PolynomialFeatures" tool which automatically creates both higher order feature polynomials and the interaction terms between all feature combinations
+            ^ Features created include:
+                a. the bias (value of 1.0)
+                b. values raised to a power for each degree
+                c. interactions between all pairs of features
+                    - Example: Two features of A and B 
+                        # Converts two features to: 1, A, B, A**2, AB, B**2   
+    - feature scaling 
+        > .fit() call calculates the Xmin, Xmax, mean, standard deviation
+        > .transform() scales data and returns the new scaled version of the data
+            # IMPORTANT: for feature scaling, ONLY FIT TO TRAINING DATA! 
+            # Using the full data set would cause data leakage
+                ^ Data leakage - calculating statistics from fulll data set leads to some of the information of the test set leaking into the process upon the transform conversion
+
+    General steps:
+        1. import Algorithm Model class & error metric from sklearn
+        2. create object of Algortithm model by passing in parameters
+        3. fit the model with train set parameters
+        4. predict on the test set
+        5. view performance by running error metric on test and predictions
+
+Polynomial Regression
+    * Addresses 2 issues 
+        1. Non-linear relationship to label
+            > Example feature behaves like log(x)
+        2. Interaction between features
+            > See if combination of tv AND newspaper ads has a stronger effect than either on its own
+
+Overfitting and Underfitting
+    * Higher order polynmomial model performs signficantly better than standard linear regression model 
+    * What trade-offs to consider
+        > Known as Bias-Variance trade-off
+            # Overfitting - model fits too much noise from the data. This often results in low error on training sets, but high error test/validation sets. It has too much variance. Often the result of an overly complex model
+            # Underfitting - model does not capture the underlying trend of the data and does not fit the data well enough. Low variance but high bias. Underfitting is often a result of an excessively simple model.
+        > When deciding optimal complexity and wanting to evaluate model's performance, consider both train error & test error to select an ideal complexity
+            # In polynomial regression, complexity directly relates to the degree of the polynomial, but many ml algorithms have their own hyperparameters that can increase complexity
+            # We can measure error vs complexity! 
+    * How to choose optimal degree for the polynomial
+
+Regularization
+    * Seeks to solve common model issues
+        > Minimize model complexity
+        > Penalizing the loss function 
+        > Reducing model overfitting (add bias to remove variance)
+    * 3 main types 
+        1. L1 Regularization - adds a penalty to the absolute value of the magnitude of the coefficients 
+            # LASSO Regression (LASSO = least absolute shrinkage and selection operator)
+                ^ Limits size of coefficients
+                ^ Downfall: Can yield sparse models where some coefficients can be zero
+                    * As a result, the model will note even consider coefficients equal to zero; similar to subset selection 
+                    * Models generated from LASSO are generally easy to interpret
+        2. L2 Regularization - Adds a penalty equal to the square of the magnitude of coefficients (shrinkage penalty)
+            # Ridge Regression
+                ^ All coefficients are shrunk by the same factor
+                ^ Does not necessarily eliminate coefficients
+                ^ The shrinkage penalty is tuneable (lambda)
+                    * How to choose best lambda value?
+                        - Use cross validation to explore multiple lambda options and then choose the best one 
+                    * In sklearn, lambda is referred to as alpha!!!!!!!
+        3. Combining L1 & L2 - combine L1 & L2 w/ the addition of an alpha parameter deciding the ration between them
+            # Elastic Net
+    * Costs of Regularization methods 
+        > Introduce additional hyperparameter that needs to be tuned
+        > A multiplier to the penalty to decide the "strength" of the penalty
+
+Feature Scaling
+    * Improvees convergance of steepest descent algorithms, which do not possess the property of scale invariance
+    * Critical benefit of feature scaling related to gradient descent
+    * Allows us to directly compare model coefficients to each other
+    * Benefits
+        > lead to great increases in performance
+        > Absolutely necessary for models 
+        > Virtually no "real" downsides
+            # Does not take not long to compute 
+            # Will not harm any algorthim
+    * Caveats
+        > Must always scale new data before feeding to model 
+        > effects direct interpretability of feature coefficients
+            ^ Easier to compare coefficients to one another, harder to relate back to original unscaled feature
+    * Two main ways to scale
+        1. Standardization - rescales data to have mean of 0 and standard deviation of 1 (also referred to "Z-score normalization")
+        2. Normalization - rescales all data values to be between 0 and 1
+    * Steps
+        1. Perform train, test split 
+        2. Fit to training data 
+        3. Transform training data 
+        4. Transform test data
+    * Note - never feature scale for y
+
+Cross Validation
+    * More advanced set of methods for splitting data into training and testing sets
+    * Allows you to train all parts and test all parts!
+        > Run train and test on all k parts, calculate the error and the then get the mean error back
+        > Gives much better sense of true performance, because multiple splits have occurred
+    * Con 
+        > Have to repeat computations k number of times (computationally expensive on large data sets)
+    * I will be using K-fold cross-validation! Always - it will alwasy produce the most accurate model.
+        > Common choice for K is 10 so each test set is 10% of your total data
+        > Largest K possible would be equal to number of rows 
+            # Known as leave one out cross validation (computationally very expensive, but the logical choice for any smaller dataset)
+            # By far the most accurate
+    * How to understand how model behaves for data it has not seen and not been influenced by? This is philosophical - I personally will ignore this
+        > Use a "hold out" test set
+            # K-fold cross validation for everything except the hold out test set
+            # After training and tuning, perform final test on the hold out test set
+    * sklearn useres a "scorer object" for cross validation metrics 
+        > higher return values are better than lower return values
+        > for sklearn, this also applies to RMSE, where smaller is better! A negative rmse is created by sklearn, so the highest negative number is the best!
