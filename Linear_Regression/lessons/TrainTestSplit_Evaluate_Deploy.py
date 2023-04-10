@@ -110,7 +110,7 @@ plt.show()
 dump(final_model, 'final_sales_model.joblib') # Trained model file saved on computer that you can send to someoene
 
 # Load a saved model
-loaded_model = load('final_sales_model.joblib')
+loaded_model = load('linear_final_sales_model.joblib')
 print(loaded_model.coef_) # See that is the same model as the one deployed
 
 '''

@@ -44,6 +44,14 @@ SciKit Learn
     - this allows users to swap out algorithms easily to test various approaches
     - sklearn is a "one stop shop for ml"; includes train/test split, cross validation, etc.
     - "statsmodels" python library contains more statistical description of models such as significance levels
+    - sklearn's preprocessing library contains many useful tools to apply to original data before model training 
+        > One is the "PolynomialFeatures" tool which automatically creates both higher order feature polynomials and the interaction terms between all feature combinations
+            ^ Features created include:
+                a. the bias (value of 1.0)
+                b. values raised to a power for each degree
+                c. interactions between all pairs of features
+                    - Example: Two features of A and B 
+                        # Converts two features to: 1, A, B, A**2, AB, B**2     
 
     General steps:
         1. import Algorithm Model class & error metric from sklearn
@@ -51,3 +59,41 @@ SciKit Learn
         3. fit the model with train set parameters
         4. predict on the test set
         5. view performance by running error metric on test and predictions
+
+Polynomial Regression
+    * Addresses 2 issues 
+        1. Non-linear relationship to label
+            > Example feature behaves like log(x)
+        2. Interaction between features
+            > See if combination of tv AND newspaper ads has a stronger effect than either on its own
+
+Overfitting and Underfitting
+    * Higher order polynmomial model performs signficantly better than standard linear regression model 
+    * What trade-offs to consider
+        > Known as Bias-Variance trade-off
+            # Overfitting - model fits too much noise from the data. This often results in low error on training sets, but high error test/validation sets. It has too much variance. Often the result of an overly complex model
+            # Underfitting - model does not capture the underlying trend of the data and does not fit the data well enough. Low variance but high bias. Underfitting is often a result of an excessively simple model.
+        > When deciding optimal complexity and wanting to evaluate model's performance, consider both train error & test error to select an ideal complexity
+            # In polynomial regression, complexity directly relates to the degree of the polynomial, but many ml algorithms have their own hyperparameters that can increase complexity
+            # We can measure error vs complexity! 
+    * How to choose optimal degree for the polynomial
+
+Regularization
+    * Seeks to solve common model issues
+        > Minimize model complexity
+        > Penalizing the loss function 
+        > Reducing model overfitting (add bias to remove variance)
+    * 3 main types 
+        1. L1 Regularization - adds a penalty to the absolute value of the magnitude of the coefficients 
+            # LASSO Regression 
+                ^ Limits size of coefficients
+                ^ Downfall: Can yield sparse models where some coefficients can be zero
+        2. L2 Regularization - Adds a penalty equal to the square of the magnitude of coefficients
+            # Ridge Regression 
+                ^ All coefficients are shrunk by the same factor
+                ^ Does not necessarily eliminate coefficients
+        3. Combining L1 & L2 - combine L1 & L2 w/ the addition of an alpha parameter deciding the ration between them
+            # Elastic Net
+    * Costs of Regularization methods 
+        > Introduce additional hyperparameter that needs to be tuned
+        > A multiplier to the penalty to decide the "strength" of the penalty
