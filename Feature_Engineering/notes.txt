@@ -1,0 +1,41 @@
+Adam Forestier
+April 10, 2023
+
+FEATURE ENGINEERING - process of using domain knowledge to extract features from raw data via data mining techniques
+    * Extract
+        - In general, for most algorithms, data needs to be int of float
+        - Example - for a datetime stamp, pull out year, month, etc
+        - Example - Text data; length of text, number of times certain terms are used 
+    * Combing Information
+        - Example Weekend and evening? (Nightlife - 0/1)
+    * Transform
+        - most algorithms cannot accept string data
+        - categorical data is often represented as string data: 2 options
+            1. Integer Encoding - transform to numeric data by assigning a category an integer value
+                > Possible issue: implied ordering and relationship (ordinal variable)
+                > Depends on the context, there could actually be an order... Like climbing grades
+                > Only using integer encoding when there is an order
+            2. One Hot Encoding (Dummy Variables) - Convert categories into individual features that are either 0 or 1
+                > Example: Country columns with country names (pretend 3 countries, Mexico, USA, Canada)
+                    # Turns into 3 columns of USA, Mexico & Canado.
+                    # The row has a 1 if it that country. A 0 if it is not that country. 
+                > This does increase the feature coefficients though...
+                    # If possible depending on the context, one can try to reduce feature column expansion by creating hgih level categories 
+                        ^ Example, regions or continents instead of countries
+                > Can use pandas .map() or apply() to achieve
+                > Dummy variable trap: known as multi-collinearity
+                    # Converting to dummy variables can cause features to be 
+                    # NEVER DO FOR BINARY OPTIONS
+                    # DROP one from each category
+                        > Example
+                > Not easy to add new categories
+
+OUTLIERS - always consider domain
+    * Considerations
+        > Range 
+            # InterQuartile Range
+            # Standard Deviation
+            # Visualized or domain limit value
+        > Percentage of data
+            # Few percentage points at most
+        > Utilize visualization plots to be able to see and identify outlier points
