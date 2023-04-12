@@ -39,7 +39,7 @@ grid_parameters  = {
 
 # Takes in estimator aka model, grid parameters, scoring aka metric, cv aka folds, verbose an integer that determines how much information I want printed to the terminal 
 # We then use the object of the GridSearchCV 
-# NOTE: THIS IS THE SAUCE!
+# NOTE: THIS IS THE SAUCE! Only problem is if the model is huge and or the computer's hardware is not powerful
 grid_model = GridSearchCV(base_model, grid_parameters, scoring='neg_mean_squared_error', cv=10, verbose=1)
 grid_model.fit(X_train, y_train)
 predictions = grid_model.predict(X_test) # This automatically uses the best estimator automatically!
