@@ -1,0 +1,38 @@
+Adam Forestier 
+April 15, 2023
+
+Logistic Regression
+    - Classification algorithm to predict categorical variables by transforming a Linear function into a logistic one (Sigmoid Function)
+        *Example: predict image
+            0 street image 
+            1 car image 
+    - Any continuous target can be converted into categories through discretization
+        * Example: Convert house price to range 
+            0 house price $0-100k
+            1 house price $100-200k
+            2 house price $ > 200k
+    - Classification algortithms also often produce a probability prediction belonging to a class 
+        * Example:
+            0: 10% probability
+            1: 85% probability
+            2: 5% probability
+    - Sign of Coefficient
+        * Positve Beta indicates in increase in likelihood of belonging to 1 class with increase in associated x feature 
+        * Negative Beta indicates a decrease in likelihood of belonging to 1 class with increase in associated x feature
+    - Magnitude of Coefficient
+        * Comparing magnitudes of coefficients against each other can lead to insight over which features have the strongest effect on prediction output
+            > We can use odds ration essentially comparing magnitudes of coefficients against each other
+            > Do this to see which features have stronger prediction power 
+            > Harder to directly interpret magnitude of Beta directly, especially when we could have discrete and continuous x feature values 
+            > In terms of fitting coefficients, one does it in terms of log odds
+    - Maximum Likelihood
+        * go from log odds back to probability
+        * Measure the likelihoods of probabilities 
+        * Likelihood = product of probabilities of belonging to a class 1
+            > ratio until hitting .5 probability of belonging to class 1
+            > After which, it is 1 - the ratio of of probability of class 1; because that will give the ratio of hitting class 0
+            > Take natural log of each  
+                > example .9, .8, .65, .3, .2 = ln(.9) * ln(.8) * ln(.65) * ln(1 - .3), * ln(1 - .2) = likelihood
+    - Testing model accuracy
+        * Choose best coefficient values in log odds terms that creates maximum likelihood
+        * While we are trying to maximize the likelihood, we still need something to minimize, since the computer's gradient descent methods can only search for minimums
