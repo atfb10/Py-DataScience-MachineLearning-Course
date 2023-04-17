@@ -45,12 +45,12 @@ Logistic Regression
             - boxplot of each x feature on the label (somewhat covered by pairplot. Just shows distribution more explicitly)
             - pairplot on data with hue set to the label: BEST! 
             - Heatmap of correlation: Also Amazing!
-    - Classification
+    - Classification Performance Metrics
         * Confusion Matrix
-            > True Positive
-            > False Positive 
-            > False Negative
-            > True Negative
+            > True Positive - Correctly Predicted to be class 1
+            > False Positive - Incorrectly predicted to be class 1, but actually class 0 
+            > False Negative - Incorrectly predicted to be class 0, but actually class 1
+            > True Negative - Correctly Predicted to be class 0
         * Accuracy
             > Taken by adding up true positives and true negatives then dividing by the total
             > Accuracy Paradox 
@@ -62,8 +62,29 @@ Logistic Regression
                 # If a class is only a small percentage (n%), then a classifier that always predicts the majority class will always have an accuracy of (1-n)
                     ^ Example: 95/100 people are healthy, 5/100 are infected 
                         * This means that "accuracy" is 95%! Even if every individual is predicted as healhty. This is not good!
-                        * Need precision, recall and f1-score for more balanced performance metrics
+                        * Need precision, recall and f1-score for more balanced performance metrics!
+        * Recall & Precision can help illuminate our performance, specifically in regards to teh relavant or positive case 
+        * Depending on the model, there is typically a trade-off between precision & Recall
         * Precision
-        * Recall 
+            > When Prediction is positive, how often is it correct?
+            > True Positives/Total Predicted Positives
+        * Recall (sensitivity)
+            > When it is actually a positive case, how often is it correct?
+            > True Positives/Total Actual Positives
+            > Answers the question: How many relevant cases?
         * f1-score
-        * ROC Curves
+            > Combination of Precision & Recall
+            > The harmonic meaan of precision & recall 
+                # F = (2 * precision * recall) / (precision + recall)
+                # We use harmonic mean, instead of normal mean. This allows the entire harmonic mean to go to zero if EITHER precision or recall ends up being zero
+        * ROC Curves (Receiver Operator Characteristic curve)
+            > True Positive Rate is y-axis
+            > False Positive Rate is x-axis
+            > There can be a trade-off between True Positive and False Positives
+            > In certain situations, we gladly accept more false positives to reduce false negatives!
+                # Example: A dangerous virus test. We would MUCH RATHER PRODUCE false positives and later do more stringent experimentation, than to accidentally release a false negative!
+                # We lower the cutoff
+            > We simply chart the True vs False positives for various cut-offs for the ROC Curve
+            > By adjusting our cut-off limit, we can adjust our True vs False Positives 
+            > A perfect model would have a zero False Positive Rate
+                # AUC - Area Under the Curve; allows us to compare ROCs for different models. The perfect score = 1
