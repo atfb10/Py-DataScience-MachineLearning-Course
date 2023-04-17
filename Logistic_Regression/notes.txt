@@ -1,0 +1,90 @@
+Adam Forestier 
+April 15, 2023
+
+Logistic Regression
+    - Classification algorithm to predict categorical variables by transforming a Linear function into a logistic one (Sigmoid Function)
+        *Example: predict image
+            0 street image 
+            1 car image 
+    - Any continuous target can be converted into categories through discretization
+        * Example: Convert house price to range 
+            0 house price $0-100k
+            1 house price $100-200k
+            2 house price $ > 200k
+    - Classification algortithms also often produce a probability prediction belonging to a class 
+        * Example:
+            0: 10% probability
+            1: 85% probability
+            2: 5% probability
+    - Sign of Coefficient
+        * Positve Beta indicates in increase in likelihood of belonging to 1 class with increase in associated x feature 
+        * Negative Beta indicates a decrease in likelihood of belonging to 1 class with increase in associated x feature
+    - Magnitude of Coefficient
+        * Comparing magnitudes of coefficients against each other can lead to insight over which features have the strongest effect on prediction output
+            > We can use odds ration essentially comparing magnitudes of coefficients against each other
+            > Do this to see which features have stronger prediction power 
+            > Harder to directly interpret magnitude of Beta directly, especially when we could have discrete and continuous x feature values 
+            > In terms of fitting coefficients, one does it in terms of log odds
+    - Maximum Likelihood
+        * go from log odds back to probability
+        * Measure the likelihoods of probabilities 
+        * Likelihood = product of probabilities of belonging to a class 1
+            > ratio until hitting .5 probability of belonging to class 1
+            > After which, it is 1 - the ratio of of probability of class 1; because that will give the ratio of hitting class 0
+            > Take natural log of each  
+                > example .9, .8, .65, .3, .2 = ln(.9) * ln(.8) * ln(.65) * ln(1 - .3), * ln(1 - .2) = likelihood
+    - Testing model accuracy
+        * Choose best coefficient values in log odds terms that creates maximum likelihood
+        * While we are trying to maximize the likelihood, we still need something to minimize, since the computer's gradient descent methods can only search for minimums
+    - Classification model general data exploratation steps 
+        * statistics
+            - value count of y label
+            - correlation of x features to y label 
+            - description of whole data set
+        * visualization
+            - boxplot of each x feature on the label (somewhat covered by pairplot. Just shows distribution more explicitly)
+            - pairplot on data with hue set to the label: BEST! 
+            - Heatmap of correlation: Also Amazing!
+    - Classification Performance Metrics
+        * Confusion Matrix
+            > True Positive - Correctly Predicted to be class 1
+            > False Positive - Incorrectly predicted to be class 1, but actually class 0 
+            > False Negative - Incorrectly predicted to be class 0, but actually class 1
+            > True Negative - Correctly Predicted to be class 0
+        * Accuracy
+            > Taken by adding up true positives and true negatives then dividing by the total
+            > Accuracy Paradox 
+                # Any classifier dealing with imbalanced classes has to confront the issue of the accuracy paradox 
+                # Imbalanced classes will always results in a distorted accuracy reflecting better performance than is truly warranted
+                    ^ Examples of imbalanced classes
+                        * Medication conditions can affect small portions of the population 
+                        * Fraud (real vs fraudelent credit card usage)
+                # If a class is only a small percentage (n%), then a classifier that always predicts the majority class will always have an accuracy of (1-n)
+                    ^ Example: 95/100 people are healthy, 5/100 are infected 
+                        * This means that "accuracy" is 95%! Even if every individual is predicted as healhty. This is not good!
+                        * Need precision, recall and f1-score for more balanced performance metrics!
+        * Recall & Precision can help illuminate our performance, specifically in regards to teh relavant or positive case 
+        * Depending on the model, there is typically a trade-off between precision & Recall
+        * Precision
+            > When Prediction is positive, how often is it correct?
+            > True Positives/Total Predicted Positives
+        * Recall (sensitivity)
+            > When it is actually a positive case, how often is it correct?
+            > True Positives/Total Actual Positives
+            > Answers the question: How many relevant cases?
+        * f1-score
+            > Combination of Precision & Recall
+            > The harmonic meaan of precision & recall 
+                # F = (2 * precision * recall) / (precision + recall)
+                # We use harmonic mean, instead of normal mean. This allows the entire harmonic mean to go to zero if EITHER precision or recall ends up being zero
+        * ROC Curves (Receiver Operator Characteristic curve)
+            > True Positive Rate is y-axis
+            > False Positive Rate is x-axis
+            > There can be a trade-off between True Positive and False Positives
+            > In certain situations, we gladly accept more false positives to reduce false negatives!
+                # Example: A dangerous virus test. We would MUCH RATHER PRODUCE false positives and later do more stringent experimentation, than to accidentally release a false negative!
+                # We lower the cutoff
+            > We simply chart the True vs False positives for various cut-offs for the ROC Curve
+            > By adjusting our cut-off limit, we can adjust our True vs False Positives 
+            > A perfect model would have a zero False Positive Rate
+                # AUC - Area Under the Curve; allows us to compare ROCs for different models. The perfect score = 1

@@ -55,5 +55,8 @@ print(best_hyperparameters)
 predictions = grid_model.predict(X_test)
 mae = mean_absolute_error(y_test, predictions)
 rmse = np.sqrt(mean_squared_error(y_test, predictions))
+avg_saleprice = df['SalePrice'].mean()
+accuracy = rmse / avg_saleprice
 print(mae)
 print(rmse)
+print(f'Accuracy Percentage = {accuracy}')
