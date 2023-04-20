@@ -1,0 +1,44 @@
+Adam Forestier
+April 19, 2023
+
+KNN (K Nearest Neighbors)
+     - It assigns a label to new data based on the distance between the old data and new data
+     - what points is the newest point closest to?
+     - K is number of neighbors taken into consideration
+     - What if there is a tie? 2 points for class 0 and 2 points for class 1
+          * Options:
+               > Always choose an odd K 
+               > Reduce K by 1 until tie is broken
+               > Randomly break tie 
+               > Choose nearest class point
+          * How SciKit-Learn chooses:
+               > The answer will always be the class that happens to appear first in the set of neighbors
+               > Results are ordered by distance, so it chooses the class of the closest point
+     - How to choose best K value?
+          * 2 methods
+               1. Elbow Method 
+                    > Select K, write down error 
+                    > Increase K until error rate increases  
+                    > Then decide to continue to increase K value and have more complex model, or stop. (human decision) 
+               2. Cross Validate grid search of multiple K values and choose K that results in lowest error (Use this!)
+                    > Will result in more complex models 
+                    > Have to determine how many k values to consider (contextual question)
+
+KNN General Process 
+     1. Choose K value 
+     2. Sort feature vectors (N dimensional space) by distance metric
+          * Minkowski
+          * Euclidean
+          * Manhattan
+          * Chebyshev
+     3. Choose class based on K neaerest feature vectors
+
+KNN Considerations
+     * Scaling for distance (features could have vastly different value ranges). SCALING IS NECESSARY FOR KNN!!!
+     * Which distance algorithm to use?
+     * KNN can be used for regression tasks, but its performance can be poor and is less efficient than other algortithms
+     * Completely different than K Means Clustering
+
+
+SciKit-Learn Pipeline - An object in SciKit-Learn that can set up a sequence of repeated operations; such as a scaler and model 
+                      - This means that only the pipleine needs to be called, instead of repeatedly having to call a scaler and model
