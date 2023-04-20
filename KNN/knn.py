@@ -2,9 +2,6 @@
 Adam Forestier
 April 19, 2023
 Notes:
-    Data
-        Label
-            * target - refers to the prescence of heart disease in the patient. 0 for no prescence, 1 for prescence
 '''
 
 import pandas as pd
