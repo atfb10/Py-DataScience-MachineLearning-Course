@@ -1,0 +1,47 @@
+Adam Forestier
+April 23, 2023
+
+Iteration: Maximum Margin Classifier -> Support Vector Classifier -> Support Vector Machines 
+
+Hyperplane - In an N-dimensional space, a hyperplane is a flat affine subspace of a hyperplane dimension N-1.
+    * Examples:
+        * 1-D Hyperplane is a single point 
+        * 2-D Hyperplane is a line 
+        * 3-D Hyperplane is a flat plane
+    * We don't use the term "hyperplane" until reaching 4 dimensions; we just use point, line or plane 
+
+Hyperplane in SVM:
+    * Main idea behind SVM: We can use hyperplanes to create seperations between classes 
+    * The new points will fall on one side of this seperating hyperplane, which we can then use to assign to a class
+    * How to choose where to put seperating hyperplane?
+        > We use the seperator that maximixes the margines between the classes!
+        > This is known as the "Maximal Margin Classifier"
+    * What happens if classes are not perfectly seperable? (We are not able to seperate w/out allowing for misclassifications) 
+        > We will have a bias-variance trade-off depending on where we place this separator
+        > Increase bias marginally to reduce variance significantly
+            ^ Leads to better long term results on future results 
+        > Distance between threshold and the observations is a "Soft Margin" - Support Vector Classifier
+            ^ Soft Margin allows for misclassification inside the margins 
+            ^ There are many possible threshold splits if we allow for soft margins
+            ^ Cross validation!!!! We use cross validation to determine the optimal size of the margins
+    * What happens in case where a hyperplane performs poorly, even when allowing for misclassifications?
+        > We move from support vector classifiers to Support Vector Machines!
+        > "Support Vector Machines" use kernels to project the data to a higher dimension, in order to use a hyperplane in this higher dimension to seperate the data
+
+Kernels
+    * Allow us to move beyond Support Vector Classifiers to Support Vector Machines
+    * Variety of kernels can be used to "project" the features to a higher dimension
+    * "Kernel Trick" - Mathmatically avoids recomputing the points in a higher dimensional space
+        > As polynomial order grows larger, the # of computations necessary to solve for margins also grows
+        > Kernel Trick solves this by making use of the "inner product" of vectors, also known as the "dot product" (Uses the dot products of the transpositions of the data)
+        > Kernels allow us to avoid computations in the enlarged feature space, by only needing to perform computations for each distinct pair of training points
+    * Kernel - a function that quantifies the similarity of two observations
+        * SIMPLY STATED: The use of kernels can be thought of as a measure of similarity between the original feature space and the enlarged feature space
+
+Support Vector Regression 
+    * Predicts continuous label instead of categorical
+    * Uses margins to try to connect w/ support vectors to get best fit possible!
+
+Miscellaneous notes
+    * "C", the regularization parameter; the margin we give to allow for misclassifications.
+        > In SciKit-Learn, the strength of the regularization is INVERSELY PROPORTIONAL TO C. By default it is 1.0. The penalty is a squared l2 penalty

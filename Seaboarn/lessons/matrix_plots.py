@@ -22,6 +22,5 @@ df = df.set_index('Countries') # Need labeled index
 sns.heatmap(df.drop('Life expectancy', axis=1), lw=.5, annot=True, cmap='viridis') # Displayed data showed all be in the same units life expectancy is number of years. Other columns are a percentage. amnotation shows the actual value.  cmap is the coloring
 plt.show()
 
-# clustermap example
+# clustermap example. NOTE: This cooked my weak pc lol. Just gonna use a heatmap so it doesn't explode; code worked great
 sns.clustermap(df.drop('Life expectancy', axis=1), lw=.5, annot=True, col_cluster=False) # col_clustering = False makes clustering based only on index
-plt.show()

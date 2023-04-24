@@ -50,14 +50,14 @@ SciKit Learn
                 a. the bias (value of 1.0)
                 b. values raised to a power for each degree
                 c. interactions between all pairs of features
-                    - Example: Two features of A and B 
+                    - Example: Two features of A and B with a degree of 2
                         # Converts two features to: 1, A, B, A**2, AB, B**2   
     - feature scaling 
         > .fit() call calculates the Xmin, Xmax, mean, standard deviation
         > .transform() scales data and returns the new scaled version of the data
             # IMPORTANT: for feature scaling, ONLY FIT TO TRAINING DATA! 
             # Using the full data set would cause data leakage
-                ^ Data leakage - calculating statistics from fulll data set leads to some of the information of the test set leaking into the process upon the transform conversion
+                ^ Data leakage - calculating statistics from full data set leads to some of the information of the test set leaking into the process upon the transform conversion
 
     General steps:
         1. import Algorithm Model class & error metric from sklearn

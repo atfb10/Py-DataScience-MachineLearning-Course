@@ -21,7 +21,7 @@ Logistic Regression
         * Negative Beta indicates a decrease in likelihood of belonging to 1 class with increase in associated x feature
     - Magnitude of Coefficient
         * Comparing magnitudes of coefficients against each other can lead to insight over which features have the strongest effect on prediction output
-            > We can use odds ration essentially comparing magnitudes of coefficients against each other
+            > We can use odds ratio essentially comparing magnitudes of coefficients against each other
             > Do this to see which features have stronger prediction power 
             > Harder to directly interpret magnitude of Beta directly, especially when we could have discrete and continuous x feature values 
             > In terms of fitting coefficients, one does it in terms of log odds
