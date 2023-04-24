@@ -37,8 +37,8 @@ red_wine_fraud_percent = (len(df[(df['quality'] == 'Fraud') & (df['type'] == 're
 white_wine_fraud_percent = (len(df[(df['quality'] == 'Fraud') & (df['type'] == 'white')]) / len(df[df['type'] == 'white'])) * 100
 
 # TASK: Calculate the correlation between the various features and the "quality" column. To do this you may need to map the column to 0 and 1 instead of a string.
-df['Fraud'] = np.vectorize(lambda quality: 0 if quality == 'Legit' else 1)(df['quality']) # 1 if fraud. 0 if legit
-df['Red'] = df['type'].apply(lambda type: 0 if type == 'white' else 1) # 1 if red. 0 if white
+df['Fraud'] = pd.get_dummies(df['quality'], drop_first=True) # 1 if fraud. 0 if legit
+df['Red'] = df['type'].map({'red': 1, 'white': 0}) # 1 if red. 0 if white
 fraud_corr = df.corr()['Fraud']
 fraud_df = fraud_corr.to_frame(name='Correlation').reset_index()
 print(fraud_df)
@@ -47,8 +47,9 @@ print(fraud_df)
 sns.barplot(data=fraud_df, x='index', y='Correlation')
 plt.show()
 
-# TASK: Create a clustermap with seaborn to explore the relationships between variables. NOTE: This cooked my weak pc lol. Just gonna use a heatmap so it doesn't explode; code worked great
-# sns.clustermap(df.drop(['quality', 'type'], axis=1), lw=.5, annot=True, col_cluster=False) # col_clustering = False makes clustering based only on index
+# TASK: Create a clustermap with seaborn to explore the relationships between variables.
+sns.clustermap(df.corr(), cmap='viridis', lw=.5, annot=True, col_cluster=False) # col_clustering = False makes clustering based only on index
+plt.show()
 sns.heatmap(df.corr(), annot=True)
 plt.show()
 
@@ -89,4 +90,4 @@ plt.show()
 class_report = classification_report(y_true=y_test, y_pred=y_pred)
 print(class_report)
 
-# The results seem wayyyy too good to be true...
+# The results seem wayyyy too good to be true... NOTE: to self - likely too high of variance, not enouogh bias; model likely overfit
