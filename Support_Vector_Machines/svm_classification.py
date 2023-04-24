@@ -60,6 +60,8 @@ degree - degree of polynomial kernal function
 gamma - 'scale', 'auto' OR manually provide floating point number.  scale = 1 / (n_features * x variants()). auto = 1 / n_features
       - gamma defines how much influence a single training example has. as gamma gets larger the closer the other examples have to be to be effected
       - NOTE: gamma getting larger, indicates each point having bigger influence. too high of gamma too high variance (overfitting). too low, too much bias and won't fit enough
+class_weight - Set the parameter C of class i to class_weight[i]*C for SVC. If not given, all classes are supposed to have weight one. 
+             - NOTE: The “balanced” mode uses the values of y to automatically adjust weights inversely proportional to class frequencies in the input data as n_samples / (n_classes * np.bincount(y))
 '''
 
 # Linear example
