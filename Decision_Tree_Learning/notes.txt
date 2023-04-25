@@ -1,6 +1,10 @@
 Adam Forestier
 April 24, 2024
 
+# NOTE: SO IMPORTANT - in SciKit-Learn - Decision trees CANNOT take in multicategorical data as strings for features! Must make dummies!
+# NOTE: CAN keep labels as strings
+# NOTE: DO NOT NEED TO DO FEATURE SCALING FOR DECISION TREES!
+
 Decision Tree Learning - refers to the statistical modeling that uses a form of decision trees, where node splits are decided on information metric
     * Relies on information to split on nodes; information must be mathmatical (duh)
 
@@ -58,3 +62,7 @@ Adjusting Parameters
 - By using Gini Impurity as a measurement of the effectiveness of a node split, we can perform automatic feature selection by mandating an impurity threshold for an additional feature based split to occur! 
 - For overfitted trees, adding a minimum gini impurity decrease will reduce variance & raise bias!
 - We can mandate a maximum depth of tree
+
+# Final Note(s):
+    * Excellent developments have been made in decision trees
+    * Default Decision Tree Learning Model is not used commonly any more, as Random Forests and Boosted are even better!
