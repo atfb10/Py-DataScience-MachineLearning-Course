@@ -1,0 +1,49 @@
+Adam Forestier
+April 26, 2023
+
+Random Forests
+    * have ability to greatly increase performance based on expanding ideas from the Decision Tree
+    * Known as "ensemble" learners - they rely on an ensemble of models (multiple decision trees)
+        > Create subsets of randomly picked features at each potential split
+        > Unbelievably powerful! 
+            1. All useful features are used.
+            2. Ensures to not overfit
+        > To select how a feature is labeled; tally up votes from all decision trees!
+        > Probability of belonging to a class, is the number of votes (trees) labeling the winning class divided by total votes (trees)
+        > Can also do this for regression tasks!
+            ^ Labeling of feature is done by taking the average of predicted values on the continuous label!
+        
+Hyperparameters
+    * Most are shared with Decision trees!
+    * n_estimators - how many decisions to use total in the forest
+        > KEY: Random forests does not overfit! You can run as many trees as you want
+        > Reasonable default value is 100. Publications suggest 64-128
+        > More features, more n_estimators
+        > Cross validate a grid search of trees
+        > Can Plot error vs trees if you want
+        > Will eventually get to limit of low error - @ too high of n_estimators, 1. trees become highly correlated. 2. Different random selections are simply duplicating trees that have already been created
+        > BUT will never increase error! 
+    * max_features - how many features to include in each subset
+        > OG publication suggests subset of log base 2 (N + 1) random features in subset given a set of N total features
+        > CURRENT SUGGESTED: sqrt(N) in the subset given N features
+        > Suggested n / 3 may be more suitable for regression tasks, typically larger than sqrt(N)
+        > IN PRACTICE: start with sqrt(N) for classification and do GridSearch. Do the same for regression but start with N/3
+    * bootstrap - boolean; allow for bootstrap samplimng of each training subset of features
+        > "Bootstrapping" = random sampling with replacement
+            - randomly taking items from a set and allowing items to be picked more than once
+        > Allows us to further differentiate trees. With bootstrapping you get 2 randomized training components
+            1. Subset of Features Used
+            2. Bootstrapped rows of data
+        > Bootstrapping Advantage: A hyperparameter meant to reduce correlation between trees, since trees are then trained on different subsets of feature columns and data rows
+        > NOTE TO SELF: Just use cross validation with bootstrapping True and False
+    * oob_score (Out of Bag) - boolean; calculate OOB error during training
+        > if we performed bootstrapping when building out trees, this means that for certain trees, certain rows of data were not used for training
+        > OUT of BAG SAMPLES
+            ^ For rows not used for constructing some trees, we can use it to get performance test metrics on trees that did not use these rows!
+        > It does not affect the training process
+        > KEY: It is an optional way of measuring performance, an alternative to using a standard train/test split, since bootstrapping naturally results in unused data during training
+        > Considerations:
+            1. KEY: OOB Score is limited to NOT using all the trees in the random forest, it can only be calculated on trees that did not use the OOB data
+            2. Due to not using the entire random forest, the default score of OOB Score hyperparameter is set to False
+    * random state - allows model to keep random state so results are same each time is run
+        > Randomly selecting which featurs to test; so if you want the same results each time the tree is run, must use random state!
