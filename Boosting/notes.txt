@@ -33,6 +33,8 @@ AdaBoost Consideration
     - Unlike Random forests, it is possible to overfit with AdaBoost, however it takes many trees to do this and often error has already stabilized way before enough trees are added to cause overfitting
 
 Gradient Boosting
+    - Similar to AdaBoost in which mamy weak learners are made to create in series to produce a strong ensemble model
+    - Makes use of residual erros for learning
 
 Weak Learner - Model too simple to perform well on its own
     * Weakest decision tree possible is "stump" - one node and two leaves

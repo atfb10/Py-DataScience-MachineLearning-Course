@@ -59,7 +59,8 @@ Why lowest gini impurity as root?
     * By choosing the feature with lowest resulting gini impurity in its leaf nodes, we are choosing the feature that best splits the data into "pure" classes
 
 Adjusting Parameters
-- By using Gini Impurity as a measurement of the effectiveness of a node split, we can perform automatic feature selection by mandating an impurity threshold for an additional feature based split to occur! 
+- By using Gini Impurity as a measurement of the effectiveness of a node split, 
+  we can perform automatic feature selection by mandating an impurity threshold for an additional feature based split to occur! 
 - For overfitted trees, adding a minimum gini impurity decrease will reduce variance & raise bias!
 - We can mandate a maximum depth of tree
 
