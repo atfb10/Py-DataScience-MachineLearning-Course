@@ -35,6 +35,25 @@ AdaBoost Consideration
 Gradient Boosting
     - Similar to AdaBoost in which mamy weak learners are made to create in series to produce a strong ensemble model
     - Makes use of residual erros for learning
+    - Larger trees allowed in Gradient Boosting
+    - Learning Rate coefficient same for all weak learners 
+    - KEY: Gradual series learning is based on training on the residuals of the previous model. residual - error known as "e" y - y hat
+    - Each decision tree in the ensemble returns a residual 
+    - KEY: Each new model in the series is not trying to predict y, but instead the error - e of the previous model. This is known as "f1"
+    - KEY: Then update the ORIGINAL prediction using error prediction
+    - The learning rate is the same for each new model in the series, it is not unique to each subsetquent model (unlike AdaBoost's alpha coefficient)
+    - Gradient Boosting is fairly robust to overfitting, allowing the # of estimators to be set high by default (~100)
+
+Gradient Boosting process:
+    1. Create initial model: f0
+    2. Train another model on error: e = y - f0
+    3. Create new prediction: F1 = f0 + nf1
+    4. Repeat as needed: Fm = fm-1 + nfm
+
+Gradient Boosting Intuition:
+    - We optimiize the series of trees by learning on the residuals, forcing subsequent trees to attempt to correct for the error in the previous trees
+    - The trade-off is training time.
+        > A learning rate is between 0-1, which means a very low value would mean each subsequent tree has little "say", meaning more trees need to be created, causing a longer computational training time
 
 Weak Learner - Model too simple to perform well on its own
-    * Weakest decision tree possible is "stump" - one node and two leaves
+    - Weakest decision tree possible is "stump" - one node and two leaves
