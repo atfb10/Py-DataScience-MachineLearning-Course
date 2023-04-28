@@ -26,6 +26,8 @@ AdaBoost (Adaptive Boosting)
 Intuition of AdaBoost
     - Each stump essentially represents the strength of a feature to predict
     - Building these stumps in series and adding the alpha parameter allows us to intellgiently combine the importance of each feature together
+    - IMPORTANT IMPORTANT IMPORTANT - simple models w/ very few stumps are very helpful for determining what the most critical features are
+    - IMPORTANT IMPORTANT IMPORTANT - more complex models where ALL data is present, is better for making accurate predictions 
 
 AdaBoost Consideration
     - Unlike Random forests, it is possible to overfit with AdaBoost, however it takes many trees to do this and often error has already stabilized way before enough trees are added to cause overfitting
