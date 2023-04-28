@@ -1,0 +1,36 @@
+Adam Forestier
+April 26, 2023
+
+Boosting - 
+    * Boosting is not a ml algorithm. It is a methodology applied to an existing ml algorithm
+    * Boosting is often referred to an "Meta Learning"
+    * Most commonly applied to the Decision tree as that is where it produces the best results. In theory, can be ANY ml algorithm; decision trees just work the best
+    * Main Boosting formula implies: combination of estimators w/ an applied coefficient could act as an effective ensemble estimator
+
+Question to Answer:
+    - Can an ensemble of weak learners (very simple models) be a strong learner when combined?
+
+AdaBoost (Adaptive Boosting)
+    - uses an ensemble of weak learners (simple models) and then combines them through the use of a weighted sum
+    - adapts by using previously created weak learners in order to adjust misclassified instances for the next created weak learner
+    - Instead of fitting all data at once, AdaBoost aggregrates multiple weak learners, allowing the overall ensemble model to learn slowly from the features (build 1 tree at a time)
+        > What this means (incredible!):
+        > Makes simple tree (weak learner), scores itself and attaches weight to points it gets correct and incorrect
+        > KEY: The model attaches MORE weight to what it got INCORRECT
+        > KEY: The model is given an alpha score based upon its accuracy
+        > The next weak learner is made, BUT it has the weighting information available to it from the previous weak learner. Less and Less likely of missclassifying heavily weighted incorrect points from the last model
+            # Each subsequent t weak learner is built using a reweighted data set form the t-1 weak learner
+        > This process continues for T trees
+    - Certain weak learners have more final "say" in the final output than others due to the multiplied alpha parameter
+
+Intuition of AdaBoost
+    - Each stump essentially represents the strength of a feature to predict
+    - Building these stumps in series and adding the alpha parameter allows us to intellgiently combine the importance of each feature together
+
+AdaBoost Consideration
+    - Unlike Random forests, it is possible to overfit with AdaBoost, however it takes many trees to do this and often error has already stabilized way before enough trees are added to cause overfitting
+
+Gradient Boosting
+
+Weak Learner - Model too simple to perform well on its own
+    * Weakest decision tree possible is "stump" - one node and two leaves
