@@ -6,7 +6,7 @@ Logistic Regression
         *Example: predict image
             0 street image 
             1 car image 
-    - Any continuous target can be converted into categories through discretization
+    - Any continuous target can be converted into categories through discretization - This is called "Binning"
         * Example: Convert house price to range 
             0 house price $0-100k
             1 house price $100-200k
@@ -63,7 +63,7 @@ Logistic Regression
                     ^ Example: 95/100 people are healthy, 5/100 are infected 
                         * This means that "accuracy" is 95%! Even if every individual is predicted as healhty. This is not good!
                         * Need precision, recall and f1-score for more balanced performance metrics!
-        * Recall & Precision can help illuminate our performance, specifically in regards to teh relavant or positive case 
+        * Recall & Precision can help illuminate our performance, specifically in regards to the relavant or positive case 
         * Depending on the model, there is typically a trade-off between precision & Recall
         * Precision
             > When Prediction is positive, how often is it correct?

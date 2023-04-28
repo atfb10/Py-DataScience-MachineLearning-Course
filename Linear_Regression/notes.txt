@@ -88,7 +88,8 @@ Regularization
     * Seeks to solve common model issues
         > Minimize model complexity
         > Penalizing the loss function 
-        > Reducing model overfitting (add bias to remove variance) - Easy way: ALWAYS remove statsitically insignificant variables to decrease overfitting!
+        > Reducing model overfitting (add bias to remove variance) 
+            - Easy way: ALWAYS remove statsitically insignificant variables to decrease overfitting!
     * 3 main types 
         1. L1 Regularization - adds a penalty to the absolute value of the magnitude of the coefficients 
             # LASSO Regression (LASSO = least absolute shrinkage and selection operator)
@@ -116,7 +117,7 @@ Feature Scaling
     * Allows us to directly compare model coefficients to each other
     * Benefits
         > lead to great increases in performance
-        > Absolutely necessary for models 
+        > Absolutely necessary for many models 
         > Virtually no "real" downsides
             # Does not take not long to compute 
             # Will not harm any algorthim
@@ -148,7 +149,7 @@ Cross Validation
             # By far the most accurate
             # ALWAYS USE WITH linear models fit by least squares as it is the same computationally as a split of train and test set due to math magic!
             # Downside of leave one out - greatly increases variance
-    * How to understand how model behaves for data it has not seen and not been influenced by? This is philosophical - I personally will ignore this
+    * How to understand how model behaves for data it has not seen and not been influenced by?
         > Use a "hold out" test set
             # K-fold cross validation for everything except the hold out test set
             # After training and tuning, perform final test on the hold out test set

@@ -1,0 +1,59 @@
+Adam Forestier
+April 26, 2023
+
+Boosting - 
+    * Boosting is not a ml algorithm. It is a methodology applied to an existing ml algorithm
+    * Boosting is often referred to an "Meta Learning"
+    * Most commonly applied to the Decision tree as that is where it produces the best results. In theory, can be ANY ml algorithm; decision trees just work the best
+    * Main Boosting formula implies: combination of estimators w/ an applied coefficient could act as an effective ensemble estimator
+
+Question to Answer:
+    - Can an ensemble of weak learners (very simple models) be a strong learner when combined?
+
+AdaBoost (Adaptive Boosting)
+    - uses an ensemble of weak learners (simple models) and then combines them through the use of a weighted sum
+    - adapts by using previously created weak learners in order to adjust misclassified instances for the next created weak learner
+    - Instead of fitting all data at once, AdaBoost aggregrates multiple weak learners, allowing the overall ensemble model to learn slowly from the features (build 1 tree at a time)
+        > What this means (incredible!):
+        > Makes simple tree (weak learner), scores itself and attaches weight to points it gets correct and incorrect
+        > KEY: The model attaches MORE weight to what it got INCORRECT
+        > KEY: The model is given an alpha score based upon its accuracy
+        > The next weak learner is made, BUT it has the weighting information available to it from the previous weak learner. Less and Less likely of missclassifying heavily weighted incorrect points from the last model
+            # Each subsequent t weak learner is built using a reweighted data set form the t-1 weak learner
+        > This process continues for T trees
+    - Certain weak learners have more final "say" in the final output than others due to the multiplied alpha parameter
+
+Intuition of AdaBoost
+    - Each stump essentially represents the strength of a feature to predict
+    - Building these stumps in series and adding the alpha parameter allows us to intellgiently combine the importance of each feature together
+    - IMPORTANT IMPORTANT IMPORTANT - simple models w/ very few stumps are very helpful for determining what the most critical features are
+    - IMPORTANT IMPORTANT IMPORTANT - more complex models where ALL data is present, is better for making accurate predictions 
+
+AdaBoost Consideration
+    - Unlike Random forests, it is possible to overfit with AdaBoost, however it takes many trees to do this and often error has already stabilized way before enough trees are added to cause overfitting
+
+Gradient Boosting
+    - Similar to AdaBoost in which mamy weak learners are made to create in series to produce a strong ensemble model
+    - Makes use of residual erros for learning
+    - Larger trees allowed in Gradient Boosting
+    - Learning Rate coefficient same for all weak learners 
+    - KEY: Gradual series learning is based on training on the residuals of the previous model. residual - error known as "e" y - y hat
+    - Each decision tree in the ensemble returns a residual 
+    - KEY: Each new model in the series is not trying to predict y, but instead the error - e of the previous model. This is known as "f1"
+    - KEY: Then update the ORIGINAL prediction using error prediction
+    - The learning rate is the same for each new model in the series, it is not unique to each subsetquent model (unlike AdaBoost's alpha coefficient)
+    - Gradient Boosting is fairly robust to overfitting, allowing the # of estimators to be set high by default (~100)
+
+Gradient Boosting process:
+    1. Create initial model: f0
+    2. Train another model on error: e = y - f0
+    3. Create new prediction: F1 = f0 + nf1
+    4. Repeat as needed: Fm = fm-1 + nfm
+
+Gradient Boosting Intuition:
+    - We optimiize the series of trees by learning on the residuals, forcing subsequent trees to attempt to correct for the error in the previous trees
+    - The trade-off is training time.
+        > A learning rate is between 0-1, which means a very low value would mean each subsequent tree has little "say", meaning more trees need to be created, causing a longer computational training time
+
+Weak Learner - Model too simple to perform well on its own
+    - Weakest decision tree possible is "stump" - one node and two leaves

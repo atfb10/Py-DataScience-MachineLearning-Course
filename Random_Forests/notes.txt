@@ -28,7 +28,7 @@ Hyperparameters
         > CURRENT SUGGESTED: sqrt(N) in the subset given N features
         > Suggested n / 3 may be more suitable for regression tasks, typically larger than sqrt(N)
         > IN PRACTICE: start with sqrt(N) for classification and do GridSearch. Do the same for regression but start with N/3
-    * bootstrap - boolean; allow for bootstrap samplimng of each training subset of features
+    * bootstrap - boolean; allow for bootstrap sampling of each training subset of features
         > "Bootstrapping" = random sampling with replacement
             - randomly taking items from a set and allowing items to be picked more than once
         > Allows us to further differentiate trees. With bootstrapping you get 2 randomized training components
