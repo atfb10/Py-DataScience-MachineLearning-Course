@@ -14,7 +14,7 @@ Hyperplane in SVM:
     * Main idea behind SVM: We can use hyperplanes to create seperations between classes 
     * The new points will fall on one side of this seperating hyperplane, which we can then use to assign to a class
     * How to choose where to put seperating hyperplane?
-        > We use the seperator that maximixes the margines between the classes!
+        > We use the seperator that maximixes the margins between the classes!
         > This is known as the "Maximal Margin Classifier"
     * What happens if classes are not perfectly seperable? (We are not able to seperate w/out allowing for misclassifications) 
         > We will have a bias-variance trade-off depending on where we place this separator

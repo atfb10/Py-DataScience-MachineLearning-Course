@@ -11,7 +11,7 @@ Logistic Regression
             0 house price $0-100k
             1 house price $100-200k
             2 house price $ > 200k
-    - Classification algortithms also often produce a probability prediction belonging to a class 
+    - Classification algorithms also often produce a probability prediction belonging to a class 
         * Example:
             0: 10% probability
             1: 85% probability
