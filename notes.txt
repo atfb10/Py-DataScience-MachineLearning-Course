@@ -7,3 +7,19 @@ Raw Data -> Processing and Storing Data = data engineering (collect & store data
 
 Supervised learning - predict an outcome
 Unsupervised learning - discover patterns in data
+
+Unsupervised Learning
+    Clustering:
+        * Using features, group together data rows into clusters
+        * If we have unlabeled data, can we attempt to cluster or group similar data points together to "discover" possible labels for clusters
+    Dimensionality Reduction
+        * Using features, discover how to combine and reduce into fewer components
+        * If we have unlabeled data, can we attempt to reduce the number of features by combining them into new components? Do these new components give us further insight for the data?
+
+Unsupervised Learning ML Pathway
+Collect & store data -> Clean and organize data -> exploratory data analysis -> Clustering or Dimensionality Reduction
+
+Questions to keep in mind with clustering: 
+    * What does it mean to "discover" labels through clustering?
+    * Without known labels, how do we measure performance?
+    * Do combinations of features hold important insights?

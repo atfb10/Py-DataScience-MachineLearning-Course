@@ -67,7 +67,7 @@ X_test = scaler.transform(X_test)
 
 # TASK: Create an instance of a Support Vector Machine classifier. NOTE: Imbalanced between Legit and Fraud for y label
 # TASK: Use a GridSearchCV to run a grid search for the best C and gamma parameters.
-clf = SVC(class_weight='balanced', C=.001, gamma='scale', kernel='linear')
+clf = SVC(class_weight='balanced', C=.001, gamma='scale')
 c = [.001, .01, .1, .5, 1]
 degree = [1, 2, 3, 4]
 param_grid = {
