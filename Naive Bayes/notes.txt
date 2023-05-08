@@ -1,0 +1,20 @@
+Adam Forestier
+May 7, 2023
+
+Naive Bayes - shorthand for set of algorithms that use Bayes' Theorem for supervised learning classification: P(A|B) = P(B|A) * P(A) / P(B)
+    * In ML, we model the probability of belonging to a class given a vector of features
+        > What is the probability (C) given a feature vector (X)
+        > The numerator is equivalent to a joint probability model!
+        > The chain rule can rewrite this numerator as a series of products of conditional probabilities
+        > Need to make an assumption - we assume all x features are MUTUALLY INDEPENDENT of each other (hence "Naive")
+            # This is almost never the case in actuality; words are not chosen at random, they are chosen to form thoughts
+            # In practice, it still performs very well
+
+Variations of Naive Bayes models:
+    * Multinomial Naive Bayes
+    * Gaussian Naive Bayes
+    * Complement Naive Bayes
+    * Bernoulli Naive Bayes
+    * Categorical Naive Bayes
+
+    * This course focuses on Multinomial Naive Bayes (it is most often used in the context of natural language processing)
