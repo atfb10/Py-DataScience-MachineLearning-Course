@@ -1,0 +1,59 @@
+Adam Forestier
+May 7, 2023
+
+Naive Bayes - shorthand for set of algorithms that use Bayes' Theorem for supervised learning classification: P(A|B) = P(B|A) * P(A) / P(B)
+    * In ML, we model the probability of belonging to a class given a vector of features
+        > What is the probability (C) given a feature vector (X)
+        > The numerator is equivalent to a joint probability model!
+        > The chain rule can rewrite this numerator as a series of products of conditional probabilities
+        > Need to make an assumption - we assume all x features are MUTUALLY INDEPENDENT of each other (hence "Naive")
+            # This is almost never the case in actuality; words are not chosen at random, they are chosen to form thoughts
+            # In practice, it still performs very well
+
+Variations of Naive Bayes models:
+    * Multinomial Naive Bayes
+    * Gaussian Naive Bayes
+    * Complement Naive Bayes
+    * Bernoulli Naive Bayes
+    * Categorical Naive Bayes
+
+This course focuses on Multinomial Naive Bayes (it is most often used in the context of natural language processing)
+    * Start with prior probability of belonging to each class 
+    * Start with count vectorization on classes 
+    * Calculate conditionational probabilities for each word belonging to each class
+    * To classify: 
+        > multiple prior probability * conditional probability for each . Receive score
+        > Repeat for each class
+        > Compare scores against each other, the highest score wins!
+    * Issues:
+        > What if conditional probabaility for 1 word belonging to class is 0?
+            # "Alpha Smoothing" parameter to add counts
+                ^ Example - add 1 count to each word for every class!
+                ^ This way, the count can never be 0
+                ^ Note: higher alpha value will be more smoothing, giving each word less distinct importance
+
+Feature Extraction
+    * Most classic ml algorithms cannot take in raw text as data
+    * Need to perform feature "extraction" from raw text in order to pass numerical features to the ml algorithm
+    * 2 main methods
+        1. Count Vectorization
+            # Create vocabulary of all possible words
+            # Create a vector of frequency counts
+            # Called Document Term Matrix (DTM) in SciKit Learn
+            # Treats every word as feature, w/ frequency counts acting as "strength" of feature/word
+            # For larger documents, matrices are stored as "sparse matrix" to save space, since so many values will be 0
+        2. TF-IDF - Term Frequency - Inverse Document Frequency
+            # Term Frequency = tf(t,d) - raw count of term in document (# of times term "t" occurs in document "d")
+            # KEY: IDF factor diminishes the weight of terms that occur very frequently in document set and increases the weight of terms that occur rarely
+                ^ It is logarithmically scaled inverse fraction of the documents that contain the word 
+                ^ obtained by dividing the total number of documents by the number of documents containing the term and then taking the logarithm of that quotient
+                ^ KEY: IDF is how common or rare a word is in the document set
+                ^ KEY: Closer to 0 more common
+            # KEY: TD-IDF = term frequency * (1 / document frequency)
+    * Issues to consider
+        1. Very common words ("about", "the")
+        2. Words common to particular set of documents ("run" in sports document)
+    * Handle Issues
+        > Stop Words - common enough words throughout a language that it is usually safe to remove them and not consider them as important.
+        > Most NLP libraries have a built-in list of common stop words
+        > TF-IDF addresses issue of document frequency

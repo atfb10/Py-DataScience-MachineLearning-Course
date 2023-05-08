@@ -19,7 +19,7 @@ AdaBoost (Adaptive Boosting)
         > KEY: The model attaches MORE weight to what it got INCORRECT
         > KEY: The model is given an alpha score based upon its accuracy
         > The next weak learner is made, BUT it has the weighting information available to it from the previous weak learner. Less and Less likely of missclassifying heavily weighted incorrect points from the last model
-            # Each subsequent t weak learner is built using a reweighted data set form the t-1 weak learner
+            # Each subsequent weak learner "t", is built using a reweighted data set form the t-1 weak learner
         > This process continues for T trees
     - Certain weak learners have more final "say" in the final output than others due to the multiplied alpha parameter
 
@@ -37,11 +37,11 @@ Gradient Boosting
     - Makes use of residual erros for learning
     - Larger trees allowed in Gradient Boosting
     - Learning Rate coefficient same for all weak learners 
-    - KEY: Gradual series learning is based on training on the residuals of the previous model. residual - error known as "e" y - y hat
+    - KEY: Gradual series learning is based on training on the residuals of the previous model. residual0 error known as "e" y - y hat
     - Each decision tree in the ensemble returns a residual 
     - KEY: Each new model in the series is not trying to predict y, but instead the error - e of the previous model. This is known as "f1"
     - KEY: Then update the ORIGINAL prediction using error prediction
-    - The learning rate is the same for each new model in the series, it is not unique to each subsetquent model (unlike AdaBoost's alpha coefficient)
+    - The learning rate is the same for each new model in the series, it is not unique to each subsequent model (unlike AdaBoost's alpha coefficient)
     - Gradient Boosting is fairly robust to overfitting, allowing the # of estimators to be set high by default (~100)
 
 Gradient Boosting process:
