@@ -1,0 +1,77 @@
+Adam Forestier
+May 9, 2023
+Source: https://www.youtube.com/watch?v=8b1JEDvenQU 
+        Stats Quest; XGboost is not part of the course by default.
+
+Using XGboost:
+    * Must make initial prediction. It is .5 by default; regardless of using classification or 
+    * The residuals (differences between observed and predicted values), shows us how good initial prediction is
+    * XGboost uses residuals to fit trees
+        > However, unlike gradient boost that uses regular decision trees, it uses unique trees
+
+Process
+    * Each XGboost starts as single leaf, all resiudals go to leaf.
+    * Calculate Quality Score, otherwise known as "Similarity Score", for residuals:
+        > Regression:  (sum of residiuals) ** 2 / # of residuals + lambda (regularization parameter)
+        > classification:  (sum of residiuals) ** 2 / Sum of Previous Probability * (1 - Previous Probability) + lambda
+    * Then see if we can do better by clustering similar Residuals if we split them into groups based on a threshold
+        > Then calculate similarity score for each group
+        > Calculate GAIN by summing leaf node similarity scores minus root similarity score
+    * Now, do the exact same with different thresholds!
+    * KEY Use the threshold with the highest gain as the root!
+    * KEY: We do this for every parent node until hitting max depth!
+    * KEY: Regression Output value = sum of residuals / # number of residiuals + lambda
+    * KEY: Classification Output = sum of residiuals/ Sum of Previous Probability * (1 - Previous Probability) + lambda
+    * SUMMARY: 
+        > Starts w/ initial prediction, add output of tree scaled by learning rate
+        > Do this and ensure the residuals are smaller than the original; ensuring movement in the correct direction
+        > Then start the process again with the new resiudals, build new tree, see if residuals have shrunk again. Do again and again until resiudals become minimal OR maximum number of trees has been reached
+        > Now model is trained. Feed it test data and check performance
+
+Hyperparameters
+    * Depth is 6 by default
+    * Pruning: "gamma" - the minimum gain needed to continue splitting the tree into further nodes.
+                     - subtract gain value from gamma parameter value. If gamma is a negative number, remove. If positive, keep
+                     - NOTE: setting gamma=0 does not turn off pruning! With lambda, gain can be low enough negative number can still be obtained 
+    * lambda: Regularization Parameter. It is intended to reduce the prediction's sensitivity to individual. Prevents overfitting the data!
+            > similarity decrease is inversely proportional to the number of residuals in the node
+            > When lambda > 0, it reduces the amount individual observations add to overall prediction
+    * eta: Learning Rate. Default value is .3
+    * cover: the threshold for minimum number of residuals in each leaf
+        > cover = sum of Previous Probability * (1 - Previous Probability). Default is 1
+
+Optimizations
+    * Approximate Greedy Algorithm - only used for massive data sets (otherwise uses normal greedy Algorithm)
+        > It makes a decision w/out looking ahead to see if it is the absolute best choice in the long term
+        > This allows a tree to be built relatively quickly
+        > Can separate training data into "quantiles" & use the quantiles as candidate thresholds to split the observations
+            # By default, uses about 33 quantiles
+    * Parallel Learning - only used for massive data sets
+        > split up the dataset so that multiple computers can work on it at the same time
+    * Weighted Quantile Sketch - only used for massive data sets
+        > each observation has a weight and the sum of the weights are the same in each quantile
+        > In Classification, Weights are derived from the cover metric
+            # Weights are low when Probability is high 
+            # Weights are high when Probability is low
+            # By dividing the observations into quanities where the sum of the weights are similar, we split the observations with low confidence predictions into seperate bins
+                > The advantage of WEIGHTED quantile sketch is we get smaller quanitiles when we need them
+        > In Regression, weights are all equal to 1
+    * Sparsity-Aware Split Finding - Handles missing values!
+        > tells us how to build trees with missing data
+        > how to deal with new observations when there is missing data
+    * Cache-Aware Access
+        > CPU
+            # CPU has small amount of Cache memory. This is fastest memory in a computer
+            # Attached to main memory, pretty fast, not as fast as Cache
+            # Attached to hard drive. Lots of memory, but slow
+        > XGboost puts gradients and Hessians in the cache so that it can rapidly calculate similarity scores and output values
+    * Blocks for Out-of-Core Computation
+        > Optimizations that take computer hardware into account
+        > When data set is too large for Cache and Main Memory, then at least some of it must be stored on the Hard Drive
+        > Reading & Writing to hard drive is slow, XGboost tries to minimize these actions by compressing the data
+        > CPU can decompress data from hardrive faster than hard drive can read data
+        > Spends little time uncompressing data, instead of spending a lot of time accessing the hard drive 
+        > When more than 1 hard drive is available for storage, XGBoost uses Sharding to speed up disk access
+            # Splits up data, so that data can read by multiple drives at the same time
+    * XGBoost can also speed things up by allowing you to build each tree with only a random subset of the data
+    * XGBoost can also speed up building trees by only looking at a random subset of features when deciding how to split the data
