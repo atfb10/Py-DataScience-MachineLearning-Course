@@ -1,7 +1,7 @@
 Adam Forestier
 May 9, 2023
 Source: https://www.youtube.com/watch?v=8b1JEDvenQU 
-        Stats Quest; XGboost is not part of the course by default.
+        Stats Quest; XGboost is not part of the course
 
 Using XGboost:
     * Must make initial prediction. It is .5 by default; regardless of using classification or 
