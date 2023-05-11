@@ -1,0 +1,68 @@
+Adam Forestier
+May 10, 2023
+Source: https://www.youtube.com/watch?v=3Bg2XRFOTzg
+        Stats Quest; CatBoost is not part of the course
+
+Categorical Boosting (CatBoost) - relatively simililar to GradientBoost & XGBoost
+
+Target Encoding - Done with "Ordered Target Encoding" (Avoids data leakage at all costs!)
+    * "Leakage" - refers to a row's target value having an effect on the same row's encoding
+    * Avoids Leakage when encoding Categorical variables, it starts w/ treating each row of data as if it were being fed into the algorithm sequentially
+    * Instead of using an overall mean, it uses a user defined Prior (or guess)
+        > CatBoost Encoding = OptionCount + .05 / n + 1
+        > n being the number of rows that have already seen that categorical value
+        > OptionCount being the number of rows that have already seen that categorical value AND are associated with the class 1 Label
+        > Plugs in with data of only the rows previously seen. Sequential
+    * KEY: Replacement for 1 hot encoding! Instead of making binary column for each category, it replaces string with ratio created from the CatBoost Encoding formula
+    * KEY: CatBoost puts continuous values into discrete  to be able to perform Ordered Target Encoding
+    * NOTE: Only does this if there are more than 2 options. If there are only 2 options, then they are simply replaced with 1s and 0s
+    * KEY: Once you are done creating your model, the entire dataset is used to Target Encode the new data you want to classify
+    * KEY: CatBoost works really well
+
+Building and Using Trees
+    * Each time CatBoost creates a tree, the first thing it does is randomize the rows of the training data set
+    * Then applies Ordered Target Encoding to all of the discrete columns with more than 2 
+    * Next calculates residuals by subtracting value - predicted value (The very first tree has each row's Prediction = 0)
+    * Then begins building tree by finding the best threshold for the root of the tree
+        > Start by sorting the feature data to identify thresholds
+        > CatBoost limits the max number of thresholds it tests by putting values close to each other in the same 
+        > Test thresholds
+            # Initializes outputs to be 0
+            # Run rows of data down the tree & place them according to thresholds and the row's residual 
+            # Update Output of leaf to be the average of the resiudals in it.
+            # Quantify how well thresholds perform
+                $ Calculate Cosine Similarity between resiudals & leaf output
+                $ The threshold with the highest Cosine Similarity is selected
+
+For each subsequent tree...
+    * Blank out residuals
+    * Update the Predictions by adding the Leaf Output values, scaled by a Learning Rate to them
+        > The main idea of how CatBoost calculates the output values for trees is that it treats the data as if receiving it 
+        > This means that the Residual in a row, is not part of the calculation of the Leaf Output for the same 
+        > This avoid Leakage
+    * Update Resiudals by subtracting observed values from predicted
+    * Replace target encoded values with original strings
+    * Randomize the rows
+    * Do exactly what is described in "Building and Using Trees"
+    * Do for many, many trees
+
+Predictions
+    * Encode new feature(s) as number based on training data 
+    * Run data down the trees
+    * Prediction = Learning Rate x (Sum of Outputs)
+
+CatBoost Larger Trees
+    * for larger trees, CatBoost builds "Oblivious" or "Symmetric" Decision Trees
+        > Symmetric Decision Tree - usess the exact same threshold for each node in the same 
+            # Done for two reasons
+                1. It makes the trees worse at making predictions...
+                    $ Gradient Boosting combines a lot of weak learners to make a prediction. Symmetric Decision Trees are jsut a weaker type of learner
+                2. Makes decisions much faster than normal decision trees
+                    $ They can ask all questions in a single vector operation
+
+CatBoost vs. Other Gradient Boosting
+    * To avoid Leakage, CatBoost treats data as if it were arriving sequentially by doing Target Encoding
+    * To avoid Leakage, CatBoost treats data sequentially
+    * For large trees, it utilizes Symmetric Decision Trees
+
+        
