@@ -7,7 +7,7 @@ Clustering General Concepts
     * Do not have label; way to try to "discover the label"
     * It is much harder to compare unsupervised ml algorithms against each other, due to lack of ground truth
 
-Questions
+Clustering Questions
     * How do we assign a new data point to a cluster?
         > depends on unsupervised learning algorithm
         > Use features to assign
@@ -17,3 +17,15 @@ Questions
     * How do we determine # of clusters?
     * How can we measure goodness of fit without a y label for comparison?
     * What is ground truth?
+
+K Means Clustering General Concepts
+    * Must meet following:
+        > Each pt must belong to cluster
+        > Each pt can only belong to 1 cluster
+    * Step 1: Choose # of clusters to create (this is the K value)
+    * Step 2: Randomly select K distinct data points
+        > We treat these new K points as starting 
+    * Step 3: Assign each remaining point to the nearest "cluster" points using a distance metric
+    * Step 4: Calculate the center of the cluster points (mean value of each point vector)
+    * Step 5: Assign each point to the nearest cluster center
+    * Step 6: Repeat steps 4 & 5 until there are no new reassignments!
