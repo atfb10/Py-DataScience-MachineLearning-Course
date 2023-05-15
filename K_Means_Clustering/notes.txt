@@ -16,6 +16,13 @@ Clustering Questions
         > NOTE: Clustering doesn't tell you what these new cluster labels represent. No way to know if clusters are still significant
     * How do we determine # of clusters?
     * How can we measure goodness of fit without a y label for comparison?
+        > Measure the sum of the squared distances from points to cluster centers (How tight the clustering is)
+        > Sum should decrease as K increases
+        > KEY: We look for a K value where the rate of reduction in SSD (Sum of Squared Distances) begins to decline
+            # This signifies that adding an extra cluster is NOT obtaining enough clarity of cluster separation to justify increases in K
+            # This is known as the "Elbow" method
+            # Can plot this as a line plot
+            # Can also plot SSD as barplot
     * What is ground truth?
 
 K Means Clustering General Concepts
