@@ -1,0 +1,19 @@
+Adam Forestier
+May 15, 2023
+
+Clustering General Concepts
+    * Uses unlabeled data & looks ofr similarities between groups in order to attempt to segment the data into seperate labels
+    * Use features to decide which points are most similar to other points
+    * Do not have label; way to try to "discover the label"
+    * It is much harder to compare unsupervised ml algorithms against each other, due to lack of ground truth
+
+Questions
+    * How do we assign a new data point to a cluster?
+        > depends on unsupervised learning algorithm
+        > Use features to assign
+    * If we've discovered these new cluster labels, could we use that as a y for supervised training?
+        > YES! We can use unsupervised learning to discover possible labels, then apply supervised learning on new data points!
+        > NOTE: Clustering doesn't tell you what these new cluster labels represent. No way to know if clusters are still significant
+    * How do we determine # of clusters?
+    * How can we measure goodness of fit without a y label for comparison?
+    * What is ground truth?
