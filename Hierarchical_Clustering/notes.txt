@@ -1,0 +1,38 @@
+Adam Forestier
+May 16, 2023
+
+General Info
+    * Very common in biology
+    * Lends itself nicely to visualizing clusters 
+    * Can help the user decide on appropriate # of clusters
+
+Why Use Hierarchal Clustering
+    * Easy to understand & visualize
+    * Helps users decide how many clusters to choose
+    * Not necessary to choose cluster amount before running the algorithm!
+
+Hierarchal Clustering
+    * Divides points into potential clusters
+        > Agglomerative Approach: Each Point begins as its own cluster, then clusters are joined
+        > Divisive Approach: All points begin in the same cluster, then clusters split
+    * Similarity Metric
+        > Measures distance between 2 points 
+        > Default choice is Euclidean 
+            # basically a**2 + b**2 = c** for n number of points
+            # d(p,q)**2 = (q1 - p1)**2 + (q2 - p2)**2 ....
+            # Each dimension would be a feature
+            # Using MinMaxScaler, all features can be between 0 & 1, this allows for max distance to be 1
+    * Dendogram
+        > Plot displaying all potential clusters
+        > Very computationally expensive to compute & display for larger data sets
+        > Useful for deciding # of clusters
+        > Can use "Slice" to decide cluster count
+    * Linkage: Criterion used to determine which distance to use between sets of observation
+        > Two questions:
+            # How do me measure distance from a point to an entire cluster
+            # How do me measure distance from a cluster to another cluster
+        > Once 2 or more points are together & we want to continue Agglomerative clustering to join clusters, we need to decide on a "Linkage" parameter
+        > algorithm will merge pairs of cluseters that minimize the criterion
+            # Ward: minimizes variance of clusters being merged
+            # Average: uses average distances between 2 sets
+            # Minimum or Maximum distances between all observations of the two sets
