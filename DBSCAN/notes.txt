@@ -18,10 +18,30 @@ DBSCAN Point Types
     * Border - in epsilon range of core point, but does not contain min. # of points
     * Outlier - Cannot be reached by points in a cluster assignment
 
-DBSCAN Procedure:
+DBSCAN Procedure
     * Pick a random point not yet assigned
     * Determine point type
     * Once a core point has been found, add all directly reachable points to the same cluster as core
     * Repeat until all points have been assigned to a cluster or as an outlier
 
-DBSCAN vs K-Means Clustering
+DBSCAN hyperparameter
+    * Key 2:
+        1. epsilon - distance extended from a point to a search for a min # of points
+            # Increasing epsilon allows more points to be core points which also results in more border points & less outlier points
+            # Decreasing reduces core points which also results in less border points & less outlier points
+            # Methods for finding epsilon value
+                ^ Run multiple DBSCAN models varying epsilon & measure the following:
+                    $ Number of clusters 
+                    $ Number of outliers
+                    $ Percentage of outliers
+                ^ KEY: Plot elbow diagram comparing epsilon values
+        2. Min number of points - min # of points within epsilon to be a core point
+            # Increasing to larger number of samples needed to be considered a core point, causes more points to be considered unique outliers
+            # Decreasing to larger number of samples needed to be considered a core point, causes more points to be considered core points
+            # How to choose min number of points?
+                ^ Test multiple potential values & chart against number of outliers labeled 
+            # It can be useful to increase to create potential newe smal clusters instead of complete outliers
+
+        > Changing these two hyperparameters have 2 main outcomes
+            1. Changing # of clusters
+            2. Changing what is an outlier point
