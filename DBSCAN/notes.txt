@@ -1,0 +1,27 @@
+Adam Forestier
+May 16, 2023
+
+DBSCAN - Density-based spatial clustering of applications with noise
+       - Powerful technique for clustering and outlier detection
+
+DBSCAN Key Ideas
+    * DBSCAN focuses on using density of points as its main factor for assigning cluster labels
+        > Uses density, not distance
+    * This creates the ability to find cluster segmentations that other algorithms have difficulty with
+        > Example: Cresent Moons 
+    * Iterates through points and uses 2 key hyperparameters (epsilon & minimum number of points) to assign cluster labels
+        > epsilon: Distance extended from a point
+        > minimum number of points: minimum number of points in an epsilon distance
+
+DBSCAN Point Types
+    * Core - pt with min. # of points in epsilon range
+    * Border - in epsilon range of core point, but does not contain min. # of points
+    * Outlier - Cannot be reached by points in a cluster assignment
+
+DBSCAN Procedure:
+    * Pick a random point not yet assigned
+    * Determine point type
+    * Once a core point has been found, add all directly reachable points to the same cluster as core
+    * Repeat until all points have been assigned to a cluster or as an outlier
+
+DBSCAN vs K-Means Clustering
