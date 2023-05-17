@@ -2,3 +2,30 @@ Adam Forestier
 May 17, 2023
 
 PCA = Principal Component Analysis
+
+Dimension Reduction unsupervised learning
+
+Motivation of Dimension Reduction:
+    * Visualization & Data Analysis have limitations when # of feature dimensions increases
+
+Dimensionality Reduction Outcomes
+    1. Understand which features describe the most variance in the data set
+    2. Aid human understanding of large feature sets; especially through visualization
+    * NOTE: Dimensionality Reduction algorithms do NOT simply choose a subset of the existing features:
+        > KEY: They create new dimensional components that are combinations of proportions of the existing features!
+    * Can also act as simpler data set for training data for ml algorithms
+        > Reduce dimensions then train ML algorithms on smaller dataset
+        > Reduce variance
+
+Variance Explained
+    * What measurement can we use to determine feature importance when dealing with unlabeled data?
+        > KEY: Measure the proportion to which each feature accounts for dispersion in the data set!
+    * IN PCA, components are ordered by Variance Explained
+    * Principal Component - linear combination of the original features
+    * More variance the original feature accounts for, the more influence it has over the principal components
+    * When PCA is ran...
+        > we trade off some of the explained variance for less dimensions
+        > MAJOR KEY: This can significant savings for data sets with many dimensions, but only a few strong features!!!!! 
+
+
+
