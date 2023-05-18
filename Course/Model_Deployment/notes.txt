@@ -1,0 +1,32 @@
+Adam Forestier
+May 17, 2023
+
+Model Deployment Considerations
+    * Choosing a Model
+        > Tradeoffs between model interpretability & performance
+        > On Sci-Kit Learn documentation check "Choosing the Right Estimator" for a guided map on which algorithms to consider first
+    * Purpose of Deployment
+        > Small Portfolio Project
+            # Consider writing a blog post instead
+            # Set up simple API Flask-based website on free tier service like Heroku
+        > Enterpriser Level
+            # Typically not in the realm of the data scientist who created them :)
+    * Performance Expectations
+        > Make sure to set clear expectations on model performance based on cross-validation (final hold-out set)
+        > DO NOT set expectations on the fully trained model
+        > Model Training Workflow:
+            a. train/test/validation split
+            b. hyperparameter tuning
+            c. report results on final holdout set
+            d. retrain model on all data prior to deployment!
+    * Retraining Models
+        > How often should we retrain model on incoming data?
+            # Key Considerations
+                > Is performance still good?
+                > How often are you getting new data
+                    $ Size of new data
+                    $ New data is labeled
+                    $ What percentage of data is used for training
+                    $ Example:
+                        ^ We have total of 1GB of original training data
+                        ^ Receive 1GB of new labeled data a month
