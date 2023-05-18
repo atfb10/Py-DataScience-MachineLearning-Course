@@ -1,6 +1,6 @@
 '''
 Adam Forestier
-May 16, 2023
+May 17, 2023
 '''
 
 import matplotlib.pyplot as plt
@@ -91,6 +91,7 @@ print(total_explained_variance_ratio)
 
 
 # Show explained variance increase as principal componenets increase
+# NOTE: Increase componenets until variance starts to increase slowly!
 explained_variance = []
 for n in range(1,30):
     pca = PCA(n_components=n)
