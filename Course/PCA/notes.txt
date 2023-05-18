@@ -1,8 +1,6 @@
 Adam Forestier
 May 17, 2023
 
-PCA = Principal Component Analysis
-
 Dimension Reduction unsupervised learning
 
 Motivation of Dimension Reduction:
@@ -27,5 +25,13 @@ Variance Explained
         > we trade off some of the explained variance for less dimensions
         > MAJOR KEY: This can significant savings for data sets with many dimensions, but only a few strong features!!!!! 
 
+PCA = Principal Component Analysis
+    - Operates by creating a new set of dimensions (the principal components) that are normalized linear combinations of the original features
 
-
+PCA Steps:
+    1. Get original data
+    2. Calculate Covariance Matrix
+    3. Calculate EigenVectors
+    4. Sort EigenVectors by EigenValues
+    5. Choose N largest EigenValues
+    6. Project original data onto EigenVectors
