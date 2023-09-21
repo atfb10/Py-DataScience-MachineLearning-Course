@@ -96,7 +96,7 @@ Regularization
                 ^ Limits size of coefficients
                 ^ Downfall: Can yield sparse models where some coefficients can be zero
                     * As a result, the model will note even consider coefficients equal to zero; similar to subset selection 
-                    * Models generated from LASSO are generally easy to interpret
+                ^ Models generated from LASSO are generally easy to interpret
         2. L2 Regularization - Adds a penalty equal to the square of the magnitude of coefficients (shrinkage penalty)
             # Ridge Regression
                 ^ All coefficients are shrunk by the same factor

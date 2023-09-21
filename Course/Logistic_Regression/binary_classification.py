@@ -97,7 +97,7 @@ plt.show()
 # weighted avg - weighted avg based upon support
 # NOTE: If precision, recall, & f-1 score are all close to accuracy, there is no issue of an imbalanced dataset. If accuracy is much higher, then you have an imbalanced dataset
 report = classification_report(y_true=y_test, y_pred=predictions) 
-print(classification_report)
+print(report)
 
 # NOTE: IMPORTANT. CAN IMPORT Just precision and recall. Those values are based upon only class 1
 
