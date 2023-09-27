@@ -101,5 +101,5 @@ for n in range(1,30):
 
 plt.plot(range(1,30),explained_variance)
 plt.xlabel("Number of Components")
-plt.ylabel("Variance Explained");
+plt.ylabel("Variance Explained")
 plt.show()
